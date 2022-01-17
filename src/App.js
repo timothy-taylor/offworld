@@ -4,11 +4,11 @@ import Info from "./components/info/info";
 import ControlHeader from "./components/controlheader/controlHeader";
 import MainCanvas from "./components/maincanvas/mainCanvas";
 import Footer from "./components/footer";
-import Photo from "./assets/pexels-stein-egil-liland-3374210.jpeg";
-import User from "./components/user"
+import User from "./components/user";
 import Settings from "./components/settings";
 import WhatIsIt from "./components/what";
 import playerFactory from "./components/player";
+import Photo from "./assets/pexels-stein-egil-liland-3374210.jpeg";
 
 class App extends React.Component {
   constructor() {
@@ -51,26 +51,23 @@ class App extends React.Component {
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.src = Photo;
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0);
+    img.onload = () => {
+      canvas.width = document.documentElement.clientWidth;
+      canvas.height = document.documentElement.clientHeight;
+      const pattern = ctx.createPattern(img, "repeat");
+      ctx.fillStyle = pattern;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       img.style.display = "none";
     };
-    const width = document.documentElement.clientWidth;
-    canvas.width = width - 15;
-    canvas.height = img.height;
-    return img;
   }
 
   componentDidMount() {
-    document.body.classList.add("bg-slate-900");
     const Player = playerFactory();
     this.setState({
       player: Player,
     });
 
-    //
-    // img is returned by drawCanvas for reuse
-    const img = this.drawCanvas();
+    this.drawCanvas();
 
     //
     // zoomed in canvas logic gets passed to EventListener
@@ -83,8 +80,8 @@ class App extends React.Component {
       ctx.msImageSmoothingEnabled = false;
       ctx.drawImage(
         this.canvas.current,
-        Math.min(Math.max(0, x - 5), img.width - 10),
-        Math.min(Math.max(0, y - 5), img.height - 10),
+        Math.min(Math.max(0, x - 5), this.canvas.current.width - 10),
+        Math.min(Math.max(0, y - 5), this.canvas.current.height - 10),
         10,
         10,
         0,
@@ -118,14 +115,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <main className="overscroll-contain">
+      <main className="max-w-full overflow-x-hidden overscroll-contain">
         <ControlHeader ref={this.abort} player={this.state.player} />
         <MainCanvas ref={this.canvas} />
         <Zoom ref={this.zoom} />
         <Info x={this.state.x} y={this.state.y} player={this.state.player} />
         <WhatIsIt />
         <User />
-        <Settings player={this.state.player}/>
+        <Settings player={this.state.player} />
         <Footer />
       </main>
     );

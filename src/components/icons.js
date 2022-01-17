@@ -64,7 +64,7 @@ export const UserIcon = () => (
   <svg
     id="user-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="fixed w-6 h-6 cursor-pointer text-slate-500 hover:text-slate-300 left-10 top-12"
+    className="w-6 h-6 cursor-pointer text-slate-700 hover:text-yellow-900"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -84,7 +84,7 @@ export const UserIcon = () => (
 export const SettingsIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="fixed w-6 h-6 cursor-pointer left-20 top-11 text-slate-500 hover:text-slate-300"
+    className="w-6 h-6 cursor-pointer text-slate-700 hover:text-yellow-900"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
