@@ -3,9 +3,12 @@ import Zoom from "./components/zoom/zoom";
 import Info from "./components/info/info";
 import ControlHeader from "./components/controlheader/controlHeader";
 import MainCanvas from "./components/maincanvas/mainCanvas";
-import Footer from "./components/footer/footer";
+import Footer from "./components/footer";
 import Photo from "./assets/pexels-stein-egil-liland-3374210.jpeg";
-import { Player, UpdateParams, HandleAbort } from "./components/player";
+import User from "./components/user"
+import Settings from "./components/settings";
+import WhatIsIt from "./components/what";
+import playerFactory from "./components/player";
 
 class App extends React.Component {
   constructor() {
@@ -30,7 +33,7 @@ class App extends React.Component {
     const pixel = ctx.getImageData(x, y, 1, 1);
     const data = pixel.data;
     zoom(x, y);
-    UpdateParams(data, x, y, this.state.player);
+    this.state.player.updateParams(data, x, y);
     this.setState({
       x: x,
       y: y,
@@ -59,6 +62,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    document.body.classList.add("bg-slate-900");
+    const Player = playerFactory();
     this.setState({
       player: Player,
     });
@@ -108,18 +113,21 @@ class App extends React.Component {
       this.handleMove(e, canvas.getContext("2d"));
     });
     window.removeEventListener("resize", () => this.drawCanvas());
-    HandleAbort(this.state.player);
+    this.state.player?.handleAbort();
   }
 
   render() {
     return (
-      <div className="bg-slate-900">
-        <ControlHeader player={this.state.player} abort={this.abort} />
-        <MainCanvas canvas={this.canvas} />
-        <Zoom zoom={this.zoom} />
+      <main className="overscroll-contain">
+        <ControlHeader ref={this.abort} player={this.state.player} />
+        <MainCanvas ref={this.canvas} />
+        <Zoom ref={this.zoom} />
         <Info x={this.state.x} y={this.state.y} player={this.state.player} />
+        <WhatIsIt />
+        <User />
+        <Settings player={this.state.player}/>
         <Footer />
-      </div>
+      </main>
     );
   }
 }
