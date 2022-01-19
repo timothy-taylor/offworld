@@ -19,7 +19,7 @@ const playerFactory = () => {
     grainSize: 0.2,
     overlap: 0.2,
     loopStart: 0.0,
-    loopEnd: 10.0,
+    loopEnd: 1.0,
   });
   player.connect(reverb);
   player.connect(crossfade.b);
@@ -30,19 +30,12 @@ const playerFactory = () => {
   const updateBuffer = async () => {
     await buffer.load(loadAudio());
     lengthSec = buffer.length / buffer.sampleRate / 2;
-    document.getElementById("audio").classList.remove("hidden");
   };
-  const handleAbort = () => {
-    player.stop();
-    document.getElementById("abort-button").classList.add("hidden");
-    document.getElementById("explore-button").classList.remove("animate-pulse");
-  };
+  const handleAbort = () => player.stop();
   const handleExplore = async () => {
     await Tone.start();
     player.start();
-    document.getElementById("abort-button").classList.remove("hidden");
-    document.getElementById("explore-button").classList.add("animate-pulse");
-  };
+      };
   const updateParams = (data, x, y) => {
     player.playbackRate = (data[2] % 20) + 0.3;
     player.grainSize = Math.round(data[0] % lengthSec) + 0.1;

@@ -62,6 +62,7 @@ const Settings = (props) => {
             props.draw(props.canvas);
             props.player.updateBuffer();
             document.getElementById("image").classList.remove("hidden");
+            document.getElementById("audio").classList.remove("hidden");
           }}
         >
           Render changes
