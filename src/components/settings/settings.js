@@ -1,7 +1,7 @@
 import React from "react";
 import AudioUpload from "./audioupload";
 import ImageUpload from "./imageupload";
-import { CloseIcon, DeleteIcon } from "./icons";
+import { CloseIcon, DeleteIcon } from "../icons";
 
 const Settings = (props) => {
   const current = new Date();

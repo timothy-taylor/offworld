@@ -1,4 +1,4 @@
-import { CheckIcon } from "./icons";
+import { CheckIcon } from "../icons";
 
 const AudioUpload = (props) => {
   return (

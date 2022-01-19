@@ -10,12 +10,12 @@ import {
 
 const ControlHeader = (props) => (
   <nav className="">
-    <div className="fixed flex items-center content-around p-1 px-4 rounded-sm top-11 left-6 bg-slate-300 opacity-80 -skew-y-2 hover:opacity-100">
+    <div className="fixed flex items-center content-around p-1 px-4 rounded-sm top-10 left-6 bg-slate-300 opacity-80 -skew-y-2 hover:opacity-100">
       <SettingsIcon />
-      <ReverbIcon onclick={props.player.toggleReverb} />
-      <DryIcon onclick={props.player.toggleReverb} />
-      <BackwardIcon onclick={props.player.toggleReverse} />
-      <ForwardIcon onclick={props.player.toggleReverse} />
+      <ReverbIcon onclick={props.player?.toggleReverb} />
+      <DryIcon onclick={props.player?.toggleReverb} />
+      <BackwardIcon onclick={props.player?.toggleReverse} />
+      <ForwardIcon onclick={props.player?.toggleReverse} />
     </div>
 
     <button

@@ -4,7 +4,7 @@ import Info from "./components/info/info";
 import ControlHeader from "./components/controlheader/controlHeader";
 import MainCanvas from "./components/maincanvas/mainCanvas";
 import Footer from "./components/footer";
-import Settings from "./components/settings";
+import Settings from "./components/settings/settings";
 import WhatIsIt from "./components/what";
 import Warning from "./components/warning";
 import playerFactory from "./components/player";

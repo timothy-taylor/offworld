@@ -2,7 +2,7 @@ export const DryIcon = (props) => (
   <svg
     id="dry-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="w-6 h-6 cursor-pointer hover:text-yellow-900"
+    className="cursor-pointer w-7 h-7 hover:text-yellow-900"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -21,7 +21,7 @@ export const ReverbIcon = (props) => (
   <svg
     id="reverb-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="hidden w-6 h-6 cursor-pointer hover:text-yellow-900"
+    className="hidden cursor-pointer w-7 h-7 hover:text-yellow-900"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -40,7 +40,7 @@ export const BackwardIcon = (props) => (
   <svg
     id="backward-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="w-6 h-6 cursor-pointer hover:text-yellow-900"
+    className="cursor-pointer w-7 h-7 hover:text-yellow-900"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -63,7 +63,7 @@ export const ForwardIcon = (props) => (
   <svg
     id="forward-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="hidden w-6 h-6 cursor-pointer hover:text-yellow-900"
+    className="hidden cursor-pointer w-7 h-7 hover:text-yellow-900"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -186,7 +186,7 @@ export const PlayIcon = () => (
 export const SettingsIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="w-6 h-6 cursor-pointer text-slate-700 hover:text-yellow-900"
+    className="cursor-pointer w-7 h-7 text-slate-700 hover:text-yellow-900"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
