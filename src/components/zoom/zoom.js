@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const Zoom = React.forwardRef((_,ref) => (
+const Zoom = React.forwardRef((_, ref) => (
   <canvas
     ref={ref}
     width="128"

@@ -4,18 +4,17 @@ import Info from "./components/info/info";
 import ControlHeader from "./components/controlheader/controlHeader";
 import MainCanvas from "./components/maincanvas/mainCanvas";
 import Footer from "./components/footer";
-import User from "./components/user";
 import Settings from "./components/settings";
 import WhatIsIt from "./components/what";
+import Warning from "./components/warning";
 import playerFactory from "./components/player";
-import Photo from "./assets/pexels-stein-egil-liland-3374210.jpeg";
+import { loadPhoto } from "./components/load";
 
 class App extends React.Component {
   constructor() {
     super();
 
     this.canvas = React.createRef();
-    this.abort = React.createRef();
     this.zoom = React.createRef();
     this.state = {
       player: {},
@@ -45,12 +44,11 @@ class App extends React.Component {
   // draws image on the canvas
   // makes canvas the correct size
   // returns the img
-  drawCanvas() {
-    const canvas = this.canvas.current;
+  drawCanvas(canvas) {
     const ctx = canvas.getContext("2d");
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.src = Photo;
+    img.src = loadPhoto();
     img.onload = () => {
       canvas.width = document.documentElement.clientWidth;
       canvas.height = document.documentElement.clientHeight;
@@ -62,12 +60,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    sessionStorage.clear();
     const Player = playerFactory();
     this.setState({
       player: Player,
     });
 
-    this.drawCanvas();
+    this.drawCanvas(this.canvas.current);
 
     //
     // zoomed in canvas logic gets passed to EventListener
@@ -93,7 +92,7 @@ class App extends React.Component {
 
     //
     // redraws on resize
-    window.addEventListener("resize", () => this.drawCanvas());
+    window.addEventListener("resize", () => this.drawCanvas(this.canvas.current));
 
     //
     // main interactive functionality
@@ -116,13 +115,13 @@ class App extends React.Component {
   render() {
     return (
       <main className="max-w-full overflow-x-hidden overscroll-contain">
-        <ControlHeader ref={this.abort} player={this.state.player} />
+        <Warning />
+        <ControlHeader player={this.state.player} />
         <MainCanvas ref={this.canvas} />
         <Zoom ref={this.zoom} />
         <Info x={this.state.x} y={this.state.y} player={this.state.player} />
         <WhatIsIt />
-        <User />
-        <Settings player={this.state.player} />
+        <Settings player={this.state.player} draw={this.drawCanvas} canvas={this.canvas.current} />
         <Footer />
       </main>
     );

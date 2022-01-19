@@ -1,28 +1,40 @@
-import React from "react";
-import { PlayIcon, StopIcon, UserIcon, SettingsIcon } from "../icons.js";
+import {
+  PlayIcon,
+  StopIcon,
+  SettingsIcon,
+  BackwardIcon,
+  ForwardIcon,
+  ReverbIcon,
+  DryIcon,
+} from "../icons.js";
 
-const ControlHeader = React.forwardRef((props, ref) => (
+const ControlHeader = (props) => (
   <nav className="">
+    <div className="fixed flex items-center content-around p-1 px-4 rounded-sm top-11 left-6 bg-slate-300 opacity-80 -skew-y-2 hover:opacity-100">
+      <SettingsIcon />
+      <ReverbIcon onclick={props.player.toggleReverb} />
+      <DryIcon onclick={props.player.toggleReverb} />
+      <BackwardIcon onclick={props.player.toggleReverse} />
+      <ForwardIcon onclick={props.player.toggleReverse} />
+    </div>
+
     <button
-      className="fixed z-30 flex items-center p-4 font-mono border-2 rounded-sm border-slate-300 top-40 left-6 bg-slate-500 opacity-70 hover:opacity-100 -skew-y-2"
-      onClick={() => props.player.handleExplore(ref.current)}
+      id="explore-button"
+      className="fixed z-30 flex items-center p-4 font-mono border-2 rounded-sm border-slate-400 top-40 left-6 bg-slate-500 opacity-80 hover:opacity-100 -skew-y-2"
+      onClick={() => props.player.handleExplore()}
     >
       <PlayIcon />
       <span className="pl-2">Explore</span>
     </button>
     <button
-      ref={ref}
-      className="fixed z-40 flex items-center hidden p-4 font-mono border-2 rounded-sm border-slate-300 top-56 left-6 bg-slate-500 opacity-70 hover:bg-slate-100 -skew-y-2"
+      id="abort-button"
+      className="fixed z-40 flex items-center hidden p-4 font-mono border-2 rounded-sm border-slate-400 top-56 left-6 bg-slate-500 opacity-80 hover:opacity-100 -skew-y-2"
       onClick={() => props.player.handleAbort()}
     >
       <StopIcon />
       <span className="pl-2">Abort</span>
     </button>
-    <div className="fixed flex items-center content-around p-1 px-4 rounded-sm top-11 left-6 bg-slate-300 opacity-70 -skew-y-2">
-      <UserIcon />
-      <SettingsIcon />
-    </div>
   </nav>
-));
+);
 
 export default ControlHeader;
