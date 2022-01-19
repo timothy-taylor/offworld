@@ -1,3 +1,44 @@
+//
+// passing in the toggleDelay fn
+export const NoDelayIcon = (props) => (
+  <svg
+    id="nodelay-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    className="hidden cursor-pointer w-7 h-7 hover:text-yellow-900"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    onClick={() => props.onclick()}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+    />
+  </svg>
+);
+export const DelayIcon = (props) => (
+  <svg
+    id="delay-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    className="cursor-pointer w-7 h-7 hover:text-yellow-900"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    onClick={() => props.onclick()}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
+    />
+  </svg>
+);
+
+//
+// passing in the toggleReverb fn
 export const DryIcon = (props) => (
   <svg
     id="dry-icon"
@@ -16,7 +57,6 @@ export const DryIcon = (props) => (
     />
   </svg>
 );
-
 export const ReverbIcon = (props) => (
   <svg
     id="reverb-icon"
@@ -36,6 +76,8 @@ export const ReverbIcon = (props) => (
   </svg>
 );
 
+//
+// passing in the toggleReverse fn
 export const BackwardIcon = (props) => (
   <svg
     id="backward-icon"
@@ -58,7 +100,6 @@ export const BackwardIcon = (props) => (
     />
   </svg>
 );
-
 export const ForwardIcon = (props) => (
   <svg
     id="forward-icon"
@@ -83,6 +124,26 @@ export const ForwardIcon = (props) => (
 );
 
 //
+// displays when loading audio into the buffer
+export const LoadIcon = (props) => (
+  <svg
+    id={props.loadID}
+    xmlns="http://www.w3.org/2000/svg"
+    className="sticky hidden float-right w-6 h-6 text-yellow-400 -translate-y-6 -translate-x-4"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+);
+
+//
 // props.checkID
 export const CheckIcon = (props) => (
   <svg
@@ -98,23 +159,6 @@ export const CheckIcon = (props) => (
       strokeLinejoin="round"
       strokeWidth={2}
       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-    />
-  </svg>
-);
-
-export const WarningIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="w-12 h-12 text-yellow-900"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
     />
   </svg>
 );
@@ -186,7 +230,7 @@ export const PlayIcon = () => (
 export const SettingsIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="cursor-pointer w-7 h-7 text-slate-700 hover:text-yellow-900"
+    className="cursor-pointer w-7 h-7 hover:text-yellow-900"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -246,6 +290,23 @@ export const DeleteIcon = (props) => (
       strokeLinejoin="round"
       strokeWidth={2}
       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+    />
+  </svg>
+);
+
+export const WarningIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-12 h-12 text-yellow-900"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
     />
   </svg>
 );

@@ -8,10 +8,14 @@ const Warning = () => {
     >
       <CloseIcon menuID="warning" />
       <WarningIcon />
-      <p>This granular synthesizer can make loud noise,</p>
+      <h1>This granular synthesizer can make loud noise!</h1>
+      <h2 className="text-xl">before any exploration </h2>
       <p>
-        it is recommended to set your device volume to minimum before any
-        exploration.
+        it is <span className="underline">recommended</span> to set your device
+        volume to <strong>minimum</strong> <span className="italic">before</span> pressing play,
+      </p>
+      <p>
+        and then <strong>adjust to taste</strong>
       </p>
     </div>
   );

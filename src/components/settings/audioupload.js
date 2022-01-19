@@ -1,4 +1,4 @@
-import { CheckIcon } from "../icons";
+import { CheckIcon, LoadIcon } from "../icons";
 
 const AudioUpload = (props) => {
   return (
@@ -24,7 +24,8 @@ const AudioUpload = (props) => {
         <div className="flex pt-3 pl-1">
           {props.getDefaults("uploaded-audio")}
         </div>
-        <CheckIcon checkID="audio" />
+        <CheckIcon checkID="audio-check" />
+        <LoadIcon loadID="audio-load" />
       </div>
     </>
   );

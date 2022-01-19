@@ -1,4 +1,4 @@
-import { CheckIcon } from "../icons";
+import { CheckIcon, LoadIcon } from "../icons";
 
 const ImageUpload = (props) => {
   return (
@@ -24,7 +24,7 @@ const ImageUpload = (props) => {
         <div className="flex pt-3 pl-1">
           {props.getDefaults("uploaded-image")}
         </div>
-        <CheckIcon checkID="image" />
+        <CheckIcon checkID="image-check" />
       </div>
     </>
   );

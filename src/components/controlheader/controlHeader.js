@@ -6,6 +6,8 @@ import {
   ForwardIcon,
   ReverbIcon,
   DryIcon,
+  DelayIcon,
+  NoDelayIcon,
 } from "../icons.js";
 
 const ControlHeader = (props) => (
@@ -14,6 +16,8 @@ const ControlHeader = (props) => (
       <SettingsIcon />
       <ReverbIcon onclick={props.player?.toggleReverb} />
       <DryIcon onclick={props.player?.toggleReverb} />
+      <DelayIcon onclick={props.player?.toggleDelay} />
+      <NoDelayIcon onclick={props.player?.toggleDelay} />
       <BackwardIcon onclick={props.player?.toggleReverse} />
       <ForwardIcon onclick={props.player?.toggleReverse} />
     </div>

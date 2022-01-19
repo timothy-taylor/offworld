@@ -1,6 +1,7 @@
 import React from "react";
 import AudioUpload from "./audioupload";
 import ImageUpload from "./imageupload";
+import RenderButton from "./renderbutton";
 import { CloseIcon, DeleteIcon } from "../icons";
 
 const Settings = (props) => {
@@ -53,21 +54,7 @@ const Settings = (props) => {
       </p>
       <ImageUpload getDefaults={getDefaults} defaultStrings={defaultStrings} />
       <AudioUpload getDefaults={getDefaults} defaultStrings={defaultStrings} />
-      <div className="py-4 text-center">
-        <button
-          className="p-4 border-2 rounded-sm text-slate-900 border-slate-200 hover:bg-slate-900 hover:text-slate-200"
-          onClick={() => {
-            // draw will redraw the screen with the newimage
-            // updateBuffer will load the new audio file
-            props.draw(props.canvas);
-            props.player.updateBuffer();
-            document.getElementById("image").classList.remove("hidden");
-            document.getElementById("audio").classList.remove("hidden");
-          }}
-        >
-          Render changes
-        </button>
-      </div>
+      <RenderButton player={props.player} draw={props.draw} canvas={props.canvas} />
       <h5 className="absolute text-right right-4 bottom-4">{time}</h5>
     </div>
   );

@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import ErrorBoundary from "./ErrorBoundary";
 
+document.title = "Offworld";
+
 ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundary>
