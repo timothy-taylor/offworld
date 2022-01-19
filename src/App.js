@@ -96,7 +96,7 @@ class App extends React.Component {
 
     //
     // main interactive functionality
-    this.canvas.current.addEventListener("mousemove", (e) => {
+    this.canvas.current.addEventListener("pointermove", (e) => {
       this.handleMove(e, this.canvas.current.getContext("2d"), zoom);
     });
   }
@@ -105,7 +105,7 @@ class App extends React.Component {
     //
     // remove previously added EventListeners
     const canvas = this.canvas.current;
-    canvas.removeEventListener("mousemove", (e) => {
+    canvas.removeEventListener("pointermove", (e) => {
       this.handleMove(e, canvas.getContext("2d"));
     });
     window.removeEventListener("resize", () => this.drawCanvas());

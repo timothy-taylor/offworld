@@ -5,7 +5,7 @@ const MainCanvas = React.forwardRef((_, ref) => (
     ref={ref}
     width="300"
     height="300"
-    className="z-0 cursor-crosshair"
+    className="z-0 cursor-crosshair select-none"
   ></canvas>
 ));
 
