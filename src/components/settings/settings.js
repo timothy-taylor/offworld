@@ -44,7 +44,7 @@ const Settings = (props) => {
   return (
     <div
       id="settings-menu"
-      className="fixed md:min-w-[400] text-slate-900 hidden font-mono rounded-md select-none inset-4 md:left-1/2 lg:left-2/3 md:inset-y-8 md:right-6 bg-slate-500 opacity-90 z-[90] hover:opacity-100"
+      className="fixed inset-0 overflow-scroll  text-slate-900 hidden font-mono rounded-md select-none md:left-1/2 lg:left-2/3 md:inset-y-8 md:right-6 bg-slate-500 md:opacity-90 z-[90] hover:opacity-100"
     >
       <CloseIcon menuID="settings-menu" />
       <h1 className="py-4 pb-8 pl-4 text-2xl">Settings</h1>
@@ -55,7 +55,7 @@ const Settings = (props) => {
       <ImageUpload getDefaults={getDefaults} defaultStrings={defaultStrings} />
       <AudioUpload getDefaults={getDefaults} defaultStrings={defaultStrings} />
       <RenderButton player={props.player} draw={props.draw} canvas={props.canvas} />
-      <h5 className="absolute text-right right-4 bottom-4">{time}</h5>
+      <h5 className="text-center md:absolute md:right-4 md:bottom-4">{time}</h5>
     </div>
   );
 };
