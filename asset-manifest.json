@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/offworld/static/css/main.961484aa.css",
-    "main.js": "/offworld/static/js/main.6e222617.js",
+    "main.css": "/offworld/static/css/main.35faf240.css",
+    "main.js": "/offworld/static/js/main.18dd036a.js",
     "static/media/TGT-disquiet0482.wav": "/offworld/static/media/TGT-disquiet0482.2c4cd4b812efe3af32e9.wav",
     "static/media/pexels-alex-andrews-3805983.jpeg": "/offworld/static/media/pexels-alex-andrews-3805983.7ac13b80da453095c8d1.jpeg",
     "index.html": "/offworld/index.html",
-    "main.961484aa.css.map": "/offworld/static/css/main.961484aa.css.map",
-    "main.6e222617.js.map": "/offworld/static/js/main.6e222617.js.map"
+    "main.35faf240.css.map": "/offworld/static/css/main.35faf240.css.map",
+    "main.18dd036a.js.map": "/offworld/static/js/main.18dd036a.js.map"
   },
   "entrypoints": [
-    "static/css/main.961484aa.css",
-    "static/js/main.6e222617.js"
+    "static/css/main.35faf240.css",
+    "static/js/main.18dd036a.js"
   ]
 }
