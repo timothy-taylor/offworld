@@ -44,7 +44,7 @@ const Settings = (props) => {
   return (
     <div
       id="settings-menu"
-      className="fixed inset-0 overflow-scroll  text-slate-900 hidden font-mono rounded-md select-none md:left-1/2 lg:left-2/3 md:inset-y-8 md:right-6 bg-slate-500 md:opacity-90 z-[90] hover:opacity-100"
+      className="fixed max-w-xs md:max-w-md overflow-y-auto overflow-x-hidden bg-slate-500 text-slate-900 hidden font-mono md:rounded-md select-none inset-y-1 right-1 md:inset-y-8 md:right-6  md:opacity-90 z-[90] hover:opacity-100"
     >
       <CloseIcon menuID="settings-menu" />
       <h1 className="py-4 pb-8 pl-4 text-2xl">Settings</h1>

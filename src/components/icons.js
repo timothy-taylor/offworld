@@ -8,6 +8,7 @@ export const NoDelayIcon = (props) => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
+    title="Turn On Delay"
     onClick={() => props.onclick()}
   >
     <path
@@ -26,6 +27,7 @@ export const DelayIcon = (props) => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
+    title="Turn Off Delay"
     onClick={() => props.onclick()}
   >
     <path
@@ -47,6 +49,7 @@ export const DryIcon = (props) => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
+    title="Turn Reverb On"
     onClick={() => props.onclick()}
   >
     <path
@@ -65,6 +68,7 @@ export const ReverbIcon = (props) => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
+    title="Turn Reverb Off"
     onClick={() => props.onclick()}
   >
     <path
@@ -86,6 +90,7 @@ export const BackwardIcon = (props) => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
+    title="Turn Reverse Off"
     onClick={() => {
       props.onclick();
       document.getElementById("forward-icon").classList.remove("hidden");
@@ -108,6 +113,7 @@ export const ForwardIcon = (props) => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
+    title="Turn Reverse On"
     onClick={() => {
       props.onclick();
       document.getElementById("forward-icon").classList.add("hidden");
