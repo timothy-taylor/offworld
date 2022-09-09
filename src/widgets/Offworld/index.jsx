@@ -1,4 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { useAtom } from "jotai";
+import {
+  photoAtom,
+  playerAtom,
+  newVisitorAtom,
+} from "../../services/atom-store";
+// components
 import Zoom from "../Zoom";
 import Info from "../Info";
 import ControlHeader from "../ControlHeader";
@@ -6,13 +13,12 @@ import MainCanvas from "../MainCanvas";
 import Footer from "../../components/Footer";
 import About from "../About";
 import Warning from "../Warning";
-import { useAtom } from "jotai";
-import { photoAtom, playerAtom } from "../../services/atom-store";
 
 const Offworld = () => {
+  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const canvas = useRef();
   const zoom = useRef();
-  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+  const [newVisitor] = useAtom(newVisitorAtom);
   const [player] = useAtom(playerAtom);
   const [photo] = useAtom(photoAtom);
 
@@ -46,12 +52,16 @@ const Offworld = () => {
     setCoordinates({ x, y });
   };
 
+  //
+  // shutdown audio on unmount
   useEffect(() => {
     return () => {
       player.handleAbort();
     };
   }, [player]);
 
+  //
+  // draw background on mount, window resize, or image change
   useEffect(() => {
     const drawCanvas = () => {
       const el = canvas.current;
@@ -78,7 +88,7 @@ const Offworld = () => {
 
   return (
     <main className="w-screen h-screen overflow-x-hidden overscroll-contain">
-      <Warning />
+      {newVisitor && <Warning />}
       <ControlHeader />
       <MainCanvas ref={canvas} handleMove={handleMove} />
       <Zoom ref={zoom} />

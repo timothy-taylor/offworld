@@ -4,7 +4,7 @@ import PlayerDetails from "./PlayerDetails";
 
 const Info = ({ x, y }) => {
   return (
-    <LeftFixedContainer top="20">
+    <LeftFixedContainer top="top-20">
       <InfoIcon />
       <div className="px-3">
         <p>{`${x}, ${y}`}</p>

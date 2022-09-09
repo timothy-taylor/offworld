@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 import { playerAtom } from "../../services/atom-store";
-import * as Icons from "../../components/Icons.js";
+import * as Icons from "../../components/Icons.jsx";
 import LeftFixedContainer from "../../components/LeftFixedContainer";
 
 const Toolbar = () => {
   const [player] = useAtom(playerAtom);
 
   return (
-    <LeftFixedContainer top="10">
+    <LeftFixedContainer top="top-10">
       <Link to="/settings">
         <Icons.SettingsIcon />
       </Link>

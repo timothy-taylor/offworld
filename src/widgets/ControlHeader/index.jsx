@@ -25,7 +25,7 @@ const ControlHeader = () => {
       <Toolbar />
       <LeftFixedIconButton
         id="explore-button"
-        top="40"
+        top="top-40"
         hidden={false}
         icon={<PlayIcon />}
         text="Explore"
@@ -33,7 +33,7 @@ const ControlHeader = () => {
       />
       <LeftFixedIconButton
         id="abort-button"
-        top="56"
+        top="top-56"
         hidden={true}
         icon={<StopIcon />}
         text="Abort"
