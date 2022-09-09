@@ -1,10 +1,14 @@
-import { CheckIcon, LoadIcon } from "../icons";
+import { useAtom } from "jotai";
+import { photoAtom } from "../../services/atom-store";
+import { CheckIcon } from "../../components/Icons";
 
-const ImageUpload = (props) => {
+const ImageUpload = ({ defaultStrings, getDefaults }) => {
+  const [setPhoto] = useAtom(photoAtom).reverse();
+
   return (
     <>
       <h2 className="pl-4 text-lg text-center underline">current image:</h2>
-      {props.defaultStrings("uploaded-image")}
+      {defaultStrings("uploaded-image")}
       <div className="py-4 pl-4 m-4 border-2 border-dotted">
         <input
           type="file"
@@ -14,6 +18,7 @@ const ImageUpload = (props) => {
             const reader = new FileReader();
             reader.onload = () => {
               sessionStorage.setItem("uploaded-image", reader.result);
+              setPhoto(reader.result);
             };
             reader.readAsDataURL(e.target.files[0]);
           }}
@@ -21,9 +26,7 @@ const ImageUpload = (props) => {
         <label htmlFor="image-input" className="block px-2 italic">
           upload a new image
         </label>
-        <div className="flex pt-3 pl-1">
-          {props.getDefaults("uploaded-image")}
-        </div>
+        <div className="flex pt-3 pl-1">{getDefaults("uploaded-image")}</div>
         <CheckIcon checkID="image-check" />
       </div>
     </>

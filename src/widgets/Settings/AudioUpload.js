@@ -1,10 +1,10 @@
-import { CheckIcon, LoadIcon } from "../icons";
+import { CheckIcon, LoadIcon } from "../../components/Icons";
 
-const AudioUpload = (props) => {
+const AudioUpload = ({ defaultStrings, getDefaults }) => {
   return (
     <>
       <h2 className="pt-8 text-lg text-center underline">current audio:</h2>
-      {props.defaultStrings("uploaded-audio")}
+      {defaultStrings("uploaded-audio")}
       <div className="py-4 pl-4 m-4 border-2 border-dotted">
         <input
           type="file"
@@ -21,9 +21,7 @@ const AudioUpload = (props) => {
         <label htmlFor="audio-input" className="block px-2 italic">
           upload a new audio file
         </label>
-        <div className="flex pt-3 pl-1">
-          {props.getDefaults("uploaded-audio")}
-        </div>
+        <div className="flex pt-3 pl-1">{getDefaults("uploaded-audio")}</div>
         <CheckIcon checkID="audio-check" />
         <LoadIcon loadID="audio-load" />
       </div>

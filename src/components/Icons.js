@@ -1,15 +1,15 @@
-//
-// passing in the toggleDelay fn
-export const NoDelayIcon = (props) => (
+const effectStyles = "cursor-pointer w-7 h-7 hover:text-yellow-900";
+
+export const NoDelayIcon = ({ onclick }) => (
   <svg
     id="nodelay-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="hidden cursor-pointer w-7 h-7 hover:text-yellow-900"
+    className={"hidden " + effectStyles}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    title="Turn On Delay"
-    onClick={() => props.onclick()}
+    aria-label="Turn On Delay"
+    onClick={onclick}
   >
     <path
       strokeLinecap="round"
@@ -19,16 +19,17 @@ export const NoDelayIcon = (props) => (
     />
   </svg>
 );
-export const DelayIcon = (props) => (
+
+export const DelayIcon = ({ onclick }) => (
   <svg
     id="delay-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="cursor-pointer w-7 h-7 hover:text-yellow-900"
+    className={effectStyles}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    title="Turn Off Delay"
-    onClick={() => props.onclick()}
+    aria-label="Turn Off Delay"
+    onClick={onclick}
   >
     <path
       strokeLinecap="round"
@@ -39,18 +40,16 @@ export const DelayIcon = (props) => (
   </svg>
 );
 
-//
-// passing in the toggleReverb fn
-export const DryIcon = (props) => (
+export const DryIcon = ({ onclick }) => (
   <svg
     id="dry-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="cursor-pointer w-7 h-7 hover:text-yellow-900"
+    className={effectStyles}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    title="Turn Reverb On"
-    onClick={() => props.onclick()}
+    aria-label="Turn Reverb On"
+    onClick={onclick}
   >
     <path
       strokeLinecap="round"
@@ -60,16 +59,17 @@ export const DryIcon = (props) => (
     />
   </svg>
 );
-export const ReverbIcon = (props) => (
+
+export const ReverbIcon = ({ onclick }) => (
   <svg
     id="reverb-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="hidden cursor-pointer w-7 h-7 hover:text-yellow-900"
+    className={"hidden " + effectStyles}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    title="Turn Reverb Off"
-    onClick={() => props.onclick()}
+    aria-label="Turn Reverb Off"
+    onClick={onclick}
   >
     <path
       strokeLinecap="round"
@@ -80,19 +80,17 @@ export const ReverbIcon = (props) => (
   </svg>
 );
 
-//
-// passing in the toggleReverse fn
-export const BackwardIcon = (props) => (
+export const BackwardIcon = ({ onclick }) => (
   <svg
     id="backward-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="cursor-pointer w-7 h-7 hover:text-yellow-900"
+    className={effectStyles}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    title="Turn Reverse Off"
+    aria-label="Turn Reverse Off"
     onClick={() => {
-      props.onclick();
+      onclick();
       document.getElementById("forward-icon").classList.remove("hidden");
       document.getElementById("backward-icon").classList.add("hidden");
     }}
@@ -105,17 +103,18 @@ export const BackwardIcon = (props) => (
     />
   </svg>
 );
-export const ForwardIcon = (props) => (
+
+export const ForwardIcon = ({ onclick }) => (
   <svg
     id="forward-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className="hidden cursor-pointer w-7 h-7 hover:text-yellow-900"
+    className={"hidden " + effectStyles}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    title="Turn Reverse On"
+    aria-label="Turn Reverse On"
     onClick={() => {
-      props.onclick();
+      onclick();
       document.getElementById("forward-icon").classList.add("hidden");
       document.getElementById("backward-icon").classList.remove("hidden");
     }}
@@ -131,9 +130,9 @@ export const ForwardIcon = (props) => (
 
 //
 // displays when loading audio into the buffer
-export const LoadIcon = (props) => (
+export const LoadIcon = ({ loadID }) => (
   <svg
-    id={props.loadID}
+    id={loadID}
     xmlns="http://www.w3.org/2000/svg"
     className="sticky hidden float-right w-6 h-6 text-yellow-400 -translate-y-6 -translate-x-4"
     fill="none"
@@ -149,11 +148,9 @@ export const LoadIcon = (props) => (
   </svg>
 );
 
-//
-// props.checkID
-export const CheckIcon = (props) => (
+export const CheckIcon = ({ checkID }) => (
   <svg
-    id={props.checkID}
+    id={checkID}
     xmlns="http://www.w3.org/2000/svg"
     className="sticky hidden float-right w-6 h-6 text-green-400 -translate-y-6 -translate-x-4"
     fill="none"
@@ -188,6 +185,7 @@ export const InfoIcon = () => (
     />
   </svg>
 );
+
 export const StopIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -210,6 +208,7 @@ export const StopIcon = () => (
     />
   </svg>
 );
+
 export const PlayIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -240,9 +239,6 @@ export const SettingsIcon = () => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    onClick={() =>
-      document.getElementById("settings-menu").classList.remove("hidden")
-    }
   >
     <path
       strokeLinecap="round"
@@ -253,18 +249,14 @@ export const SettingsIcon = () => (
   </svg>
 );
 
-//
-// props.menuID
-export const CloseIcon = (props) => (
+export const CloseIcon = ({ menuID }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="absolute w-8 h-8 cursor-pointer top-4 right-4 hover:text-slate-400 animate-pulse"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    onClick={() =>
-      document.getElementById(props.menuID).classList.add("hidden")
-    }
+    onClick={() => document.getElementById(menuID).classList.add("hidden")}
   >
     <path
       strokeLinecap="round"
@@ -275,9 +267,7 @@ export const CloseIcon = (props) => (
   </svg>
 );
 
-//
-// props.str
-export const DeleteIcon = (props) => (
+export const DeleteIcon = ({ str }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="w-6 h-6 cursor-pointer hover:text-slate-300"
@@ -285,10 +275,8 @@ export const DeleteIcon = (props) => (
     viewBox="0 0 24 24"
     stroke="currentColor"
     onClick={() => {
-      sessionStorage.removeItem(props.str);
-      document
-        .getElementById(props.str.split("-").pop())
-        .classList.add("hidden");
+      sessionStorage.removeItem(str);
+      document.getElementById(str.split("-").pop()).classList.add("hidden");
     }}
   >
     <path
