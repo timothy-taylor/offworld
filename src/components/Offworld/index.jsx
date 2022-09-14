@@ -1,26 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import { useAtom } from "jotai";
-import {
-  photoAtom,
-  playerAtom,
-  newVisitorAtom,
-} from "../../services/atom-store";
+import { playerAtom } from "../../stores/audio-engine-store";
+import { imageAtom } from "../../stores/canvas-store";
+
 // components
-import Zoom from "../Zoom";
+import Zoom from "./Zoom";
 import Info from "../Info";
 import ControlHeader from "../ControlHeader";
-import MainCanvas from "../MainCanvas";
-import Footer from "../../components/Footer";
-import About from "../About";
+import MainCanvas from "./MainCanvas";
+import Footer from "../Footer";
 import Warning from "../Warning";
 
 const Offworld = () => {
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+
   const canvas = useRef();
   const zoom = useRef();
-  const [newVisitor] = useAtom(newVisitorAtom);
+
   const [player] = useAtom(playerAtom);
-  const [photo] = useAtom(photoAtom);
+  const [defaultImage] = useAtom(imageAtom);
 
   const drawZoom = (x, y) => {
     const el = canvas.current;
@@ -68,7 +66,7 @@ const Offworld = () => {
       const ctx = el.getContext("2d");
       const img = new Image();
       img.crossOrigin = "anonymous";
-      img.src = photo;
+      img.src = defaultImage;
       img.onload = () => {
         el.width = document.documentElement.clientWidth;
         el.height = document.documentElement.clientHeight;
@@ -84,16 +82,15 @@ const Offworld = () => {
     return () => {
       window.removeEventListener("resize", drawCanvas);
     };
-  }, [photo]);
+  }, [defaultImage]);
 
   return (
     <main className="w-screen h-screen overflow-x-hidden overscroll-contain">
-      {newVisitor && <Warning />}
+      <Warning />
       <ControlHeader />
+      <Info x={coordinates.x} y={coordinates.y} />
       <MainCanvas ref={canvas} handleMove={handleMove} />
       <Zoom ref={zoom} />
-      <Info x={coordinates.x} y={coordinates.y} />
-      <About />
       <Footer />
     </main>
   );

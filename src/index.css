@@ -1,3 +1,19 @@
+@font-face {
+    font-family: "Notable";
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url(./assets/Notable/Notable-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Armata";
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url(./assets/Armata/Armata-Regular.ttf) format("truetype");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

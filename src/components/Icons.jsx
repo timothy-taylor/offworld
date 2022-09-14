@@ -1,18 +1,17 @@
 import { useAtom } from "jotai";
-import { newVisitorAtom } from "../services/atom-store";
+import { newVisitorAtom } from "../stores/user-store";
 
-const effectStyles = "cursor-pointer w-7 h-7 hover:text-yellow-900";
+const effectStyles = "w-7 h-7";
 
-export const NoDelayIcon = ({ onclick }) => (
+export const NoDelayIcon = () => (
   <svg
     id="nodelay-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className={"hidden " + effectStyles}
+    className={effectStyles}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    aria-label="Turn On Delay"
-    onClick={onclick}
+    aria-label="Delay state is off"
   >
     <path
       strokeLinecap="round"
@@ -23,7 +22,7 @@ export const NoDelayIcon = ({ onclick }) => (
   </svg>
 );
 
-export const DelayIcon = ({ onclick }) => (
+export const DelayIcon = () => (
   <svg
     id="delay-icon"
     xmlns="http://www.w3.org/2000/svg"
@@ -31,8 +30,7 @@ export const DelayIcon = ({ onclick }) => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    aria-label="Turn Off Delay"
-    onClick={onclick}
+    aria-label="Delay state is on"
   >
     <path
       strokeLinecap="round"
@@ -43,7 +41,7 @@ export const DelayIcon = ({ onclick }) => (
   </svg>
 );
 
-export const DryIcon = ({ onclick }) => (
+export const DryIcon = () => (
   <svg
     id="dry-icon"
     xmlns="http://www.w3.org/2000/svg"
@@ -51,8 +49,7 @@ export const DryIcon = ({ onclick }) => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    aria-label="Turn Reverb On"
-    onClick={onclick}
+    aria-label="Reverb state is off"
   >
     <path
       strokeLinecap="round"
@@ -63,16 +60,15 @@ export const DryIcon = ({ onclick }) => (
   </svg>
 );
 
-export const ReverbIcon = ({ onclick }) => (
+export const ReverbIcon = () => (
   <svg
     id="reverb-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className={"hidden " + effectStyles}
+    className={effectStyles}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    aria-label="Turn Reverb Off"
-    onClick={onclick}
+    aria-label="Reverb state is on"
   >
     <path
       strokeLinecap="round"
@@ -83,7 +79,7 @@ export const ReverbIcon = ({ onclick }) => (
   </svg>
 );
 
-export const BackwardIcon = ({ onclick }) => (
+export const BackwardIcon = () => (
   <svg
     id="backward-icon"
     xmlns="http://www.w3.org/2000/svg"
@@ -91,12 +87,7 @@ export const BackwardIcon = ({ onclick }) => (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    aria-label="Turn Reverse Off"
-    onClick={() => {
-      onclick();
-      document.getElementById("forward-icon").classList.remove("hidden");
-      document.getElementById("backward-icon").classList.add("hidden");
-    }}
+    aria-label="Playback state is reverse"
   >
     <path
       strokeLinecap="round"
@@ -107,20 +98,15 @@ export const BackwardIcon = ({ onclick }) => (
   </svg>
 );
 
-export const ForwardIcon = ({ onclick }) => (
+export const ForwardIcon = () => (
   <svg
     id="forward-icon"
     xmlns="http://www.w3.org/2000/svg"
-    className={"hidden " + effectStyles}
+    className={effectStyles}
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    aria-label="Turn Reverse On"
-    onClick={() => {
-      onclick();
-      document.getElementById("forward-icon").classList.add("hidden");
-      document.getElementById("backward-icon").classList.remove("hidden");
-    }}
+    aria-label="Playback state is normal"
   >
     <path
       strokeLinecap="round"
@@ -131,8 +117,6 @@ export const ForwardIcon = ({ onclick }) => (
   </svg>
 );
 
-//
-// displays when loading audio into the buffer
 export const LoadIcon = ({ loadID }) => (
   <svg
     id={loadID}
@@ -155,7 +139,7 @@ export const CheckIcon = ({ checkID }) => (
   <svg
     id={checkID}
     xmlns="http://www.w3.org/2000/svg"
-    className="sticky hidden float-right w-6 h-6 text-green-400 -translate-y-6 -translate-x-4"
+    className="absolute hidden w-6 h-6 text-green-400 -translate-y-5 translate-x-64"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -252,8 +236,8 @@ export const SettingsIcon = () => (
   </svg>
 );
 
-export const CloseIcon = ({ menuID }) => {
-  const [setNewVisitor] = useAtom(newVisitorAtom).reverse();
+export const CloseIcon = ({ menuID, warningShown }) => {
+  const setNewVisitor = useAtom(newVisitorAtom)[1];
 
   return (
     <svg
@@ -264,8 +248,9 @@ export const CloseIcon = ({ menuID }) => {
       stroke="currentColor"
       onClick={() => {
         //
-        // once the warning component is closed, we won't show it again
-        if (menuID === "warning") setNewVisitor(false);
+        // once the warning component is closed once, we won't show it again
+        // setNewVisitor is a bool which conditionally renders <Warning/>
+        if (warningShown) setNewVisitor(false);
 
         document.getElementById(menuID).classList.add("hidden");
       }}

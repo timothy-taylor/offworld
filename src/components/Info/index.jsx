@@ -1,11 +1,9 @@
-import { InfoIcon } from "../../components/Icons";
-import LeftFixedContainer from "../../components/LeftFixedContainer";
+import LeftFixedContainer from "../LeftFixedContainer";
 import PlayerDetails from "./PlayerDetails";
 
 const Info = ({ x, y }) => {
   return (
-    <LeftFixedContainer top="top-20">
-      <InfoIcon />
+    <LeftFixedContainer addStyles="top-20">
       <div className="px-3">
         <p>{`${x}, ${y}`}</p>
         <PlayerDetails />

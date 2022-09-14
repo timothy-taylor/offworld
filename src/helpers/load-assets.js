@@ -4,5 +4,4 @@ import Sample from "../assets/TGT-disquiet0482.wav";
 export const loadPhoto = (image = sessionStorage.getItem("uploaded-image")) =>
   image ? image : Photo;
 
-export const loadAudio = (audio = sessionStorage.getItem("uploaded-audio")) =>
-  audio ? audio : Sample;
+export const loadAudio = (audio) => audio ?? Sample;

@@ -1,11 +1,13 @@
 import { useAtom } from "jotai";
-import { playerAtom } from "../../services/atom-store";
-import Nav from "../../components/Nav";
+import { playerAtom } from "../../stores/audio-engine-store";
+import { useNavigate } from "react-router-dom";
+import Nav from "../Nav";
 import Toolbar from "./Toolbar";
-import LeftFixedIconButton from "../../components/LeftFixedIconButton";
-import { PlayIcon, StopIcon } from "../../components/Icons";
+import LeftFixedIconButton from "../Offworld/LeftFixedIconButton";
+import { PlayIcon, SettingsIcon, StopIcon } from "../Icons";
 
 const ControlHeader = () => {
+  const navigate = useNavigate();
   const [player] = useAtom(playerAtom);
 
   const handlePlay = () => {
@@ -24,17 +26,21 @@ const ControlHeader = () => {
     <Nav>
       <Toolbar />
       <LeftFixedIconButton
+        icon={<SettingsIcon />}
+        addStyles="top-40"
+        text="Settings"
+        handleClick={() => navigate("/settings")}
+      />
+      <LeftFixedIconButton
         id="explore-button"
-        top="top-40"
-        hidden={false}
+        addStyles="top-56"
         icon={<PlayIcon />}
         text="Explore"
         handleClick={handlePlay}
       />
       <LeftFixedIconButton
         id="abort-button"
-        top="top-56"
-        hidden={true}
+        addStyles="top-72 hidden"
         icon={<StopIcon />}
         text="Abort"
         handleClick={handleStop}
