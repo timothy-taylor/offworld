@@ -1,9 +1,5 @@
 import { useAtom } from "jotai";
-import {
-  isDelayAtom,
-  isReverbAtom,
-  isReverseAtom,
-} from "../../stores/audio-engine-store";
+import { isDelayAtom, isReverbAtom, isReverseAtom } from "../../../stores/audio-engine-store";
 import AudioUpload from "./AudioUpload";
 import ImageUpload from "./ImageUpload";
 import SettingsButton from "./SettingsButton";
@@ -13,6 +9,7 @@ const Parameters = () => {
   const [isReverb, toggleReverb] = useAtom(isReverbAtom);
   const [isDelay, toggleDelay] = useAtom(isDelayAtom);
   const [isReverse, toggleReverse] = useAtom(isReverseAtom);
+
 
   return (
     <>
@@ -33,9 +30,6 @@ const Parameters = () => {
       <SettingsListItem text="Playback">
         <span className="pr-2">{isReverse ? "reverse" : "normal"}</span>
         <SettingsButton text="toggle" handleClick={() => toggleReverse()} />
-      </SettingsListItem>
-      <SettingsListItem text="Current settings">
-        <SettingsButton text="save as preset" />
       </SettingsListItem>
     </>
   );

@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { useAtom } from "jotai";
 import SettingsButton from "./SettingsButton";
-import { CheckIcon } from "../Icons";
-import { imageAtom } from "../../stores/canvas-store";
+import { CheckIcon } from "../../Icons";
+import { imageAtom } from "../../../stores/canvas-store";
 
 const ImageUpload = () => {
   const inputRef = useRef();
@@ -13,6 +13,7 @@ const ImageUpload = () => {
       <input
         ref={inputRef}
         type="file"
+        accept="image/*"
         className="hidden"
         onChange={(e) => {
           const reader = new FileReader();

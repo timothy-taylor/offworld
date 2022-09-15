@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { playerAtom } from "../../stores/audio-engine-store";
+import { playerAtom } from "../../../stores/audio-engine-store";
 
 const PlayerDetails = () => {
   const [player] = useAtom(playerAtom);

@@ -1,18 +1,19 @@
 import { useRef } from "react";
 import { useAtom } from "jotai";
-import { supabaseAudioAtom } from "../../stores/audio-engine-store";
-import { CheckIcon } from "../Icons";
+import { audioAtom } from "../../../stores/audio-engine-store";
+import { CheckIcon } from "../../Icons";
 import SettingsButton from "./SettingsButton";
 
 const AudioUpload = () => {
   const inputRef = useRef();
-  const setAudioAtom = useAtom(supabaseAudioAtom)[1];
+  const setAudioAtom = useAtom(audioAtom)[1];
 
   return (
     <>
       <input
         ref={inputRef}
         type="file"
+        accept="audio/*"
         className="hidden"
         onChange={(e) => {
           const reader = new FileReader();

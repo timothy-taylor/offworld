@@ -1,17 +1,19 @@
+import { useState } from "react";
+import { useAtom } from "jotai";
+import { supabase } from "../../../helpers/supabase-client";
+import { audioAtom } from "../../../stores/audio-engine-store";
+import { useGetSupabase } from "../../../hooks/useGetSupabase";
+import { userAtom } from "../../../stores/user-store";
 import SettingsListItem from "./SettingsListItem";
 import SettingsButton from "./SettingsButton";
-import { supabase } from "../../helpers/supabase-client";
-import { useAtom } from "jotai";
-import { audioAtom } from "../../stores/audio-engine-store";
-import { useState } from "react";
-import { useGetSupabase } from "../../hooks/useGetSupabase";
 
-const LoadPreset = ({ user }) => {
+const LoadPreset = () => {
+  const [filename, setFilename] = useState("");
+  const [user] = useAtom(userAtom);
   const setAudioAtom = useAtom(audioAtom)[1];
-  const [selectIndex, setSelectIndex] = useState("");
   const { data: files } = useGetSupabase(() =>
     user && supabase.storage.from("audio").list(user.id, {
-      limit: 5,
+      limit: 6,
       offset: 0,
       sortBy: { column: "name", order: "asc" },
     })
@@ -23,8 +25,8 @@ const LoadPreset = ({ user }) => {
       text={
         <select
           className="h-9 max-w-0"
-          value={selectIndex}
-          onChange={(e) => setSelectIndex(e.target.value)}
+          value={filename}
+          onChange={(e) => setFilename(e.target.value)}
         >
           <option value="">--select a preset--</option>
           {files.map((e, i) => (
@@ -40,7 +42,8 @@ const LoadPreset = ({ user }) => {
         handleClick={async () => {
           const { data: audioFile } = await supabase.storage
             .from("audio")
-            .download(selectIndex);
+            .download(filename);
+
           const asText = await audioFile.text();
           await setAudioAtom(asText);
         }}

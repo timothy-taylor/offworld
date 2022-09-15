@@ -28,7 +28,6 @@ export const supabaseAudioAtom = atom(null,
 export const audioAtom = atom(
   (get) => get(audioAtomPrimitive),
   async (get, set, newAudioFile) => {
-    console.log(newAudioFile);
     set(audioAtomPrimitive, newAudioFile);
     await player.updateBuffer(newAudioFile);
     document.getElementById("audio-check").classList.remove("hidden");

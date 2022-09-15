@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../../helpers/supabase-client";
+import { supabase } from "../../../helpers/supabase-client";
 import SettingsButton from "./SettingsButton";
 
 const LogIn = () => {
