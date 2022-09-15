@@ -5,7 +5,7 @@ import { useKey } from "../hooks/useKey";
 import { newVisitorAtom } from "../stores/user-store";
 
 const containerStyle =
-  "fixed inset-4 bg-slate-300 z-[100] flex flex-col items-center justify-center font-mono m-8 p-8";
+  "fixed inset-3 bg-slate-300 z-[100] flex flex-col items-center justify-center font-mono m-8 p-8";
 
 const Warning = () => {
   const id = useId();
@@ -20,8 +20,9 @@ const Warning = () => {
     <div id={id} className={containerStyle}>
       <CloseIcon menuID={id} warningShown={true} />
       <WarningIcon />
+      <div className="font-notable text-yellow-900">Warning</div>
       <div>This granular synthesizer can make loud noise!</div>
-      <div className="text-xl">before any exploration </div>
+      <div className="text-xl font-armata">before any exploration </div>
       <div className="text-center">
         it is <span className="underline">recommended</span> to set your device
         volume to <strong>minimum</strong>{" "}

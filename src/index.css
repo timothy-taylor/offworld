@@ -2,7 +2,7 @@
     font-family: "Notable";
     font-style: normal;
     font-weight: 400;
-    font-display: optional;
+    font-display: swap;
     src: url(./assets/Notable/Notable-Regular.ttf) format("truetype");
 }
 
@@ -10,7 +10,7 @@
     font-family: "Armata";
     font-style: normal;
     font-weight: 400;
-    font-display: optional;
+    font-display: swap;
     src: url(./assets/Armata/Armata-Regular.ttf) format("truetype");
 }
 
