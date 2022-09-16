@@ -1,53 +1,70 @@
-import { useId } from "react";
 import { useAtom } from "jotai";
-import { Link, useNavigate } from "react-router-dom";
 import { useKey } from "../../hooks/useKey";
 import { userAtom } from "../../stores/user-store";
-import { supabase } from "../../helpers/supabase-client";
 
 // components
-import SettingsButton from "./components/SettingsButton";
-import SettingsListItem from "./components/SettingsListItem";
 import LogIn from "./components/LogIn";
 import Presets from "./components/Presets";
-import Parameters from "./components/Parameters";
 import { CloseIcon } from "../Icons";
-import { SettingsH2 } from "./components/SettingsHeaders";
+import {
+  SettingsH1,
+  SettingsH2,
+} from "./components/SettingsHeaders";
+import LogOut from "./components/LogOut";
+import ImageUpload from "./components/ImageUpload";
+import AudioUpload from "./components/AudioUpload";
+import { useState } from "react";
+import SettingsButton from "./components/SettingsButton";
+import SettingsListItem from "./components/SettingsListItem";
 
-const Settings = () => {
+const Settings = ({ id }) => {
   const [user, checkForUser] = useAtom(userAtom);
-  const id = useId();
-  const navigate = useNavigate();
-  useKey("Escape", () => navigate("/"));
+  const [attemptLogin, setAttemptLogin] = useState(false);
+
+  const hideSettings = () => {
+    document.getElementById(id).classList.add("invisible", "-translate-x-full")
+  }
+
+  useKey("Escape", hideSettings);
+
+  //
+  // to insure we are not fetching against supabase
+  // unnecessarily, let's make sure users
+  // actually want authenticated functionality first
+  const LoginConditions = () => {
+    if (attemptLogin || user)
+      return user ? <LogOut email={user.email} /> : <LogIn />;
+
+    return (
+      <SettingsListItem text="User">
+        <SettingsButton
+          text="Log in or Signup"
+          handleClick={() => {
+            setAttemptLogin(true);
+            checkForUser().catch((err) => console.error(err));
+          }}
+        />
+      </SettingsListItem>
+    );
+  };
 
   return (
-    <div id={id} className="min-h-screen text-white font-armata">
-      <Link to="/" className="z-30">
-        <CloseIcon menuID={id} />
-      </Link>
-      <div className="min-h-screen bg-darkest flex flex-col items-center justify-center">
-        <h1 className="z-10 fixed top-0 lg:inset-x-auto font-notable text-neutral text-5xl md:text-6xl lg:text-8xl">
-          Offworld
-        </h1>
+    <div
+      id={id}
+      className="z-50 fixed min-h-screen w-screen md:w-3/4 lg:w-2/3 -translate-x-full ease-in-out duration-500 transition text-white font-armata invisible"
+    >
+      <CloseIcon handleClick={hideSettings} />
+      <main className="min-h-screen bg-darkest flex flex-col items-center justify-center">
+        <SettingsH1 text="Offworld" />
         <SettingsH2 text="Settings" />
+
         <ul>
-          {user ? (
-            <SettingsListItem text={user.email}>
-              <SettingsButton
-                text="Log out"
-                handleClick={async () => {
-                  await supabase.auth.signOut();
-                  checkForUser();
-                }}
-              />
-            </SettingsListItem>
-          ) : (
-            <LogIn />
-          )}
-          <Parameters />
+          {LoginConditions()}
+          <ImageUpload />
+          <AudioUpload />
           {user && <Presets />}
         </ul>
-      </div>
+      </main>
     </div>
   );
 };

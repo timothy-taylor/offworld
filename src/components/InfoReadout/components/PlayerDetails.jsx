@@ -3,7 +3,7 @@ import { playerAtom } from "../../../stores/audio-engine-store";
 
 const PlayerDetails = () => {
   const [player] = useAtom(playerAtom);
-  const grains = Math.floor(player.synth.grainSize)
+  const grains = Math.floor(player.synth.grainSize);
   const overlaps = player.synth.overlap;
 
   return (

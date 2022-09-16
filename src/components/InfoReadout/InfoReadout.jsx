@@ -1,9 +1,11 @@
 import LeftFixedContainer from "../LeftFixedContainer";
 import PlayerDetails from "./components/PlayerDetails";
+import { InfoIcon } from "./components/Icons";
 
-const Info = ({ x, y }) => {
+const InfoReadout = ({ x, y }) => {
   return (
     <LeftFixedContainer addStyles="top-20">
+      <InfoIcon />
       <div className="px-3">
         <p>{`${x}, ${y}`}</p>
         <PlayerDetails />
@@ -12,4 +14,4 @@ const Info = ({ x, y }) => {
   );
 };
 
-export default Info;
+export default InfoReadout;

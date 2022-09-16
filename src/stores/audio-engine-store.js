@@ -1,45 +1,27 @@
 import { atom } from "jotai";
-import createAudioEngine from "../helpers/audio-engine";
-import { loadAudio } from "../helpers/load-assets";
-import { supabase } from "../helpers/supabase-client";
-import { checkForUser } from "./user-store";
-
-//
-// audio file state, supabaseAudioAtom is write-only and saves file to supabase
-// audioAtom just updated state and is used to set state with a file downloaded from supabase
-const audioAtomPrimitive = atom(loadAudio());
-export const supabaseAudioAtom = atom(null,
-  async (get, set, newAudioFile) => {
-    set(audioAtomPrimitive, newAudioFile);
-    await player.updateBuffer(newAudioFile);
-    const { id } = await checkForUser();
-    const { data, error } = await supabase
-      .storage
-      .from("audio")
-      .upload(`${id}/lastUsedAudioFile`, newAudioFile, { upsert: true })
-
-    if (data) {
-      document.getElementById("audio-check").classList.remove("hidden");
-    }
-
-    if (error) console.error("audioState: ", error);
-  }
-)
-export const audioAtom = atom(
-  (get) => get(audioAtomPrimitive),
-  async (get, set, newAudioFile) => {
-    set(audioAtomPrimitive, newAudioFile);
-    await player.updateBuffer(newAudioFile);
-    document.getElementById("audio-check").classList.remove("hidden");
-  }
-)
+import createAudioEngine from "../lib/audio-engine";
+import { loadAudio } from "../lib/load-assets";
 
 
 //
-// audio engine state is set here and is read-only
+// audio engine state is set here at compilation and is read-only
 const player = createAudioEngine();
 const playerAtomPrimitive = atom(player);
 export const playerAtom = atom((get) => get(playerAtomPrimitive));
+
+//
+// the audio file the audio engine is using
+// is automatically updated on state change
+const audioAtomPrimitive = atom(loadAudio());
+export const audioAtom = atom(
+  (get) => get(audioAtomPrimitive),
+  async (_, set, newAudioFile) => {
+    set(audioAtomPrimitive, newAudioFile);
+    await player.updateBuffer(newAudioFile);
+
+    document.getElementById("audio-check").classList.remove("hidden");
+  }
+);
 
 //
 // some user changeable synth states with custom set logic,
@@ -53,9 +35,11 @@ export const isDelayAtom = atom(
     const isDelayCurrent = get(isDelayPrimitive);
     const isReverbCurrent = get(isReverbAtom);
     const update = newValue ?? !isDelayCurrent;
-    set(isDelayPrimitive, update)
-    player.setDelay(update, isReverbCurrent)
-  })
+
+    set(isDelayPrimitive, update);
+    player.setDelay(update, isReverbCurrent);
+  }
+);
 
 const isReverbPrimitive = atom(true);
 export const isReverbAtom = atom(
@@ -63,6 +47,7 @@ export const isReverbAtom = atom(
   (get, set, newValue) => {
     const isDelayCurrent = get(isDelayAtom);
     const update = newValue ?? !get(isReverbPrimitive);
+
     set(isReverbPrimitive, update);
     player.setReverb(update, isDelayCurrent);
   }
@@ -73,6 +58,7 @@ export const isReverseAtom = atom(
   (get) => get(isReversePrimitive),
   (get, set, newValue) => {
     const update = newValue ?? !get(isReversePrimitive);
+
     set(isReversePrimitive, update);
     player.setReverse(update);
   }

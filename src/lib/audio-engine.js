@@ -33,8 +33,8 @@ const createAudioEngine = () => {
     await buffer.load(audioSample);
     lengthSec = buffer.length / buffer.sampleRate / 2;
   };
-  const handleAbort = () => player.stop();
-  const handleExplore = async () => {
+  const handleShutdown = () => player.stop();
+  const handleStart = async () => {
     await Tone.start();
     player.start();
   };
@@ -90,8 +90,8 @@ const createAudioEngine = () => {
 
   return {
     synth: player,
-    handleAbort,
-    handleExplore,
+    handleAbort: handleShutdown,
+    handleExplore: handleStart,
     updateBuffer,
     updateParams,
     setReverse,

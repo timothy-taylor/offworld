@@ -1,15 +1,16 @@
 import { useRef } from "react";
 import { useAtom } from "jotai";
-import SettingsButton from "./SettingsButton";
 import { CheckIcon } from "../../Icons";
 import { imageAtom } from "../../../stores/canvas-store";
+import SettingsListItem from "./SettingsListItem";
+import SettingsButton from "./SettingsButton";
 
 const ImageUpload = () => {
   const inputRef = useRef();
   const setImage = useAtom(imageAtom)[1];
 
   return (
-    <>
+    <SettingsListItem text="Image">
       <input
         ref={inputRef}
         type="file"
@@ -31,7 +32,7 @@ const ImageUpload = () => {
         }}
       />
       <CheckIcon checkID="image-check" />
-    </>
+    </SettingsListItem>
   );
 };
 

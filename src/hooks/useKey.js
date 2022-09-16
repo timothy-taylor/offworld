@@ -2,9 +2,7 @@ import { useEffect } from "react";
 
 export const useKey = (key, handler) => {
   const keyUpHandler = (e) => {
-    if (e.key === key) {
-      handler();
-    }
+    if (e.key === key) handler();
   };
 
   useEffect(() => {

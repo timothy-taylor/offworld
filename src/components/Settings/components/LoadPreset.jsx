@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAtom } from "jotai";
-import { supabase } from "../../../helpers/supabase-client";
+import { supabase } from "../../../lib/supabase-client";
 import { audioAtom } from "../../../stores/audio-engine-store";
 import { useGetSupabase } from "../../../hooks/useGetSupabase";
 import { userAtom } from "../../../stores/user-store";
@@ -11,12 +11,14 @@ const LoadPreset = () => {
   const [filename, setFilename] = useState("");
   const [user] = useAtom(userAtom);
   const setAudioAtom = useAtom(audioAtom)[1];
-  const { data: files } = useGetSupabase(() =>
-    user && supabase.storage.from("audio").list(user.id, {
-      limit: 6,
-      offset: 0,
-      sortBy: { column: "name", order: "asc" },
-    })
+  const { data: files } = useGetSupabase(
+    () =>
+      user &&
+      supabase.storage.from("audio").list(user.id, {
+        limit: 6,
+        offset: 0,
+        sortBy: { column: "name", order: "asc" },
+      })
   );
 
   if (!user) return null;
@@ -49,7 +51,7 @@ const LoadPreset = () => {
         }}
       />
     </SettingsListItem>
-  )
-}
+  );
+};
 
 export default LoadPreset;
