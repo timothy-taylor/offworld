@@ -38,7 +38,7 @@ const Settings = ({ id }) => {
     return (
       <SettingsListItem text="User">
         <SettingsButton
-          text="Log in or Signup"
+          text="Sign-up / Log-in"
           handleClick={() => {
             setAttemptLogin(true);
             checkForUser().catch((err) => console.error(err));
