@@ -16,10 +16,3 @@ export const userAtom = atom(
     set(userAtomPrimitive, user);
   }
 );
-
-//
-// this piece of state makes sure the Warning component
-// is only shown on initially load,
-// without the logic pertaining to this, the warning
-// would be shown everytime we navigate from Settings to the App
-export const newVisitorAtom = atom(true);
