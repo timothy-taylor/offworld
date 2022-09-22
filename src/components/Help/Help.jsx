@@ -32,9 +32,8 @@ const Help = ({ id }) => {
           the bottom right-hand corner.
         </HelpP>
         <HelpP>
-          Unfortunately, the current state of Offworld is not mobile,
-          touchscreen, or a11y friendly. Attempts are being made to rectify
-          this.
+          Unfortunately, the current state of Offworld is not a11y friendly.
+          Attempts are being made to rectify this.
         </HelpP>
         <HelpP>
           If you'd like signup as user, you can save audio/visual combinations
