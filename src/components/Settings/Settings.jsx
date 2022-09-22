@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { useKey } from "../../hooks/useKey";
+import { useKeyboard } from "../../hooks/useKeyboard";
 import { userAtom } from "../../stores/user-store";
 
 // components
@@ -25,7 +25,7 @@ const Settings = ({ id }) => {
     document.getElementById(id).classList.add("invisible", "-translate-x-full")
   }
 
-  useKey("Escape", hideSettings);
+  useKeyboard("Escape", hideSettings);
 
   //
   // to insure we are not fetching against supabase
@@ -53,7 +53,7 @@ const Settings = ({ id }) => {
       id={id}
       className="z-50 fixed min-h-screen w-screen md:w-3/4 lg:w-2/3 -translate-x-full ease-in-out duration-500 transition text-white font-armata invisible"
     >
-      <CloseIcon handleClick={hideSettings} />
+      <CloseIcon handleClick={hideSettings} onTouchEnd={hideSettings} />
       <main className="min-h-screen bg-darkest flex flex-col items-center justify-center">
         <SettingsH1 text="Offworld" />
         <SettingsH2 text="Settings" />

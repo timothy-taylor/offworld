@@ -45,13 +45,19 @@ const App = () => {
       0,
       0,
       300,
-      300,
+      300
     );
   };
 
   const handleMove = (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
+    let x, y;
+    if (e?.touches) {
+      x = e.touches.item(0).pageX;
+      y = e.touches.item(0).pageY;
+    } else {
+      x = e.pageX;
+      y = e.pageY;
+    }
     const ctx = mainRef.current.getContext("2d");
     const { data } = ctx.getImageData(x, y, 1, 1);
     drawZoom(x, y);
@@ -77,14 +83,15 @@ const App = () => {
       img.crossOrigin = "anonymous";
       img.src = image;
       img.onload = () => {
-        el.width = document.documentElement.clientWidth;
-        el.height = document.documentElement.clientHeight;
+        el.width = document.documentElement.clientWidth + 600;
+        el.height = document.documentElement.clientHeight + 600;
         ctx.fillStyle = ctx.createPattern(img, "repeat");
-        ctx.fillRect(0, 0, el.width, el.height);
+        ctx.fillRect(0, 0, el.width + 600, el.height + 600);
         img.style.display = "none";
       };
     };
 
+    drawZoom(100,100)
     drawCanvas();
     window.addEventListener("resize", drawCanvas);
 
@@ -94,11 +101,11 @@ const App = () => {
   }, [image]);
 
   return (
-    <main className="w-screen h-screen overflow-x-hidden overscroll-contain">
+    <main className="w-screen h-screen overflow-hidden overscroll-contain">
       <Warning />
       <Controls settingsId={settingsId} helpId={helpId} />
       <InfoReadout x={coordinates.x} y={coordinates.y} />
-      <Settings id={settingsId}/>
+      <Settings id={settingsId} />
       <Help id={helpId} />
       <MainCanvas ref={mainRef} handleMove={handleMove} />
       <Zoom ref={zoomRef} />

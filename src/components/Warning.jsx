@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { useKey } from "../hooks/useKey";
+import { useKeyboard } from "../hooks/useKeyboard";
 import { CloseIcon, WarningIcon } from "./Icons";
 import { toggleClass } from "../utils/classList";
 
@@ -9,7 +9,7 @@ const containerStyle =
 const Warning = () => {
   const id = useId();
 
-  useKey("Escape", () => document.getElementById(id).classList.add("hidden"));
+  useKeyboard("Escape", () => document.getElementById(id).classList.add("hidden"));
 
   return (
     <div id={id} className={containerStyle}>
@@ -17,15 +17,15 @@ const Warning = () => {
         toggleClass(id, "hidden");
       }}/>
       <WarningIcon />
-      <div className="font-notable text-yellow-900">Warning</div>
-      <div>This granular synthesizer can make loud noise!</div>
-      <div className="text-xl font-armata">before any exploration</div>
+      <div className="font-notable text-yellow-900 text-center">Warning</div>
+      <div className="text-center">This granular synthesizer can make loud noise!</div>
+      <div className="text-xl font-armata text-center">before any exploration</div>
       <div className="text-center">
         it is <span className="underline">recommended</span> to set your device
         volume to <strong>minimum</strong>{" "}
         <span className="italic">before</span> pressing play,
       </div>
-      <div>
+      <div className="text-center">
         and then <strong>adjust to taste</strong>
       </div>
     </div>

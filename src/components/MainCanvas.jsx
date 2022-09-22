@@ -7,6 +7,9 @@ const MainCanvas = forwardRef(({ handleMove }, ref) => (
     width="300"
     height="300"
     onPointerMove={handleMove}
+    onTouchStart={handleMove}
+    onTouchMove={handleMove}
+    onTouchEnd={handleMove}
   />
 ));
 

@@ -5,6 +5,7 @@ import { CheckIcon } from "../../Icons";
 import SettingsButton from "./SettingsButton";
 import SettingsListItem from "./SettingsListItem";
 
+const allowedFiletypes = ["pcm", "wav", "mp3", "aiff", "aac", "ogg", "flac", "alac"]
 const AudioUpload = () => {
   const inputRef = useRef();
   const setAudioAtom = useAtom(audioAtom)[1];
@@ -14,14 +15,18 @@ const AudioUpload = () => {
       <input
         ref={inputRef}
         type="file"
-        accept="audio/*"
         className="hidden"
         onChange={(e) => {
           const reader = new FileReader();
           reader.onload = () => {
             setAudioAtom(reader.result).catch((e) => console.error(e));
           };
-          reader.readAsDataURL(e.target.files[0]);
+
+          const path = e.target.value.split('.');
+          const extension = `${path[path.length - 1]}`;
+          if (allowedFiletypes.includes(extension)) {
+            reader.readAsDataURL(e.target.files[0]);
+          }
         }}
       />
       <SettingsButton

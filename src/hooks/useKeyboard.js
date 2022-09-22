@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useKey = (key, handler) => {
+export const useKeyboard = (key, handler) => {
   const keyUpHandler = (e) => {
     if (e.key === key) handler();
   };

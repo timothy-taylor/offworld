@@ -1,6 +1,6 @@
 export const SettingsH1 = ({ text }) => {
   return (
-    <h1 className="z-10 fixed top-0 lg:inset-x-auto font-notable text-neutral text-6xl">
+    <h1 className="z-10 fixed top-0 lg:inset-x-auto font-notable text-neutral text-4xl md:text-6xl">
       {text}
     </h1>
   );
