@@ -1,8 +1,8 @@
-import { HelpP } from "./components/HelpP";
+import { useKeyboard } from "../../hooks/useKeyboard";
 import { toggleClass } from "../../utils/classList";
+import { HelpP } from "./components/HelpP";
 import { CloseIcon } from "../Icons";
 import { SettingsH2 } from "../Settings/components/SettingsHeaders";
-import { useKeyboard } from "../../hooks/useKeyboard";
 
 const Help = ({ id }) => {
   useKeyboard("Escape", () =>
@@ -14,11 +14,7 @@ const Help = ({ id }) => {
       id={id}
       className="fixed inset-0 z-50 flex flex-col items-center justify-center hidden bg-darkest text-white font-armata overflow-y-auto"
     >
-      <CloseIcon
-        handleClick={() => {
-          toggleClass(id, "hidden");
-        }}
-      />
+      <CloseIcon handleClick={() => toggleClass(id, "hidden")} />
       <div className="overflow-y-auto p-12">
         <SettingsH2 text="Thoughts, tips, and tricks" />
         <HelpP>

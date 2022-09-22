@@ -1,15 +1,17 @@
-import Settings from "./components/Settings";
-import { useAtom } from "jotai";
 import { useEffect, useId, useRef, useState } from "react";
+import { useAtom } from "jotai";
 import { playerAtom } from "./stores/audio-engine-store";
 import { imageAtom } from "./stores/canvas-store";
+
+// components
 import Warning from "./components/Warning";
 import Controls from "./components/Controls";
 import InfoReadout from "./components/InfoReadout";
 import MainCanvas from "./components/MainCanvas";
 import Zoom from "./components/Zoom";
 import Footer from "./components/Footer";
-import Help from "./components/Help/Help";
+import Help from "./components/Help";
+import Settings from "./components/Settings";
 
 const App = () => {
   const settingsId = useId();
@@ -25,7 +27,7 @@ const App = () => {
   const zoomRef = useRef();
 
   //
-  // global state getters
+  // global store getters
   const [player] = useAtom(playerAtom);
   const [image] = useAtom(imageAtom);
 
@@ -83,6 +85,9 @@ const App = () => {
       img.crossOrigin = "anonymous";
       img.src = image;
       img.onload = () => {
+        //
+        // add a little extra height / width to handle any mobile scrolling strangeness
+        // but overflow is hidden by css
         el.width = document.documentElement.clientWidth + 600;
         el.height = document.documentElement.clientHeight + 600;
         ctx.fillStyle = ctx.createPattern(img, "repeat");
@@ -91,8 +96,13 @@ const App = () => {
       };
     };
 
+    //
+    // initially draw our canvases
     drawZoom(100,100)
     drawCanvas();
+
+    //
+    // and then handle window resize
     window.addEventListener("resize", drawCanvas);
 
     return () => {

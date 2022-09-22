@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAtom } from "jotai";
 import { useKeyboard } from "../../hooks/useKeyboard";
 import { userAtom } from "../../stores/user-store";
@@ -6,14 +7,10 @@ import { userAtom } from "../../stores/user-store";
 import LogIn from "./components/LogIn";
 import Presets from "./components/Presets";
 import { CloseIcon } from "../Icons";
-import {
-  SettingsH1,
-  SettingsH2,
-} from "./components/SettingsHeaders";
+import { SettingsH1, SettingsH2 } from "./components/SettingsHeaders";
 import LogOut from "./components/LogOut";
 import ImageUpload from "./components/ImageUpload";
 import AudioUpload from "./components/AudioUpload";
-import { useState } from "react";
 import SettingsButton from "./components/SettingsButton";
 import SettingsListItem from "./components/SettingsListItem";
 
@@ -51,9 +48,9 @@ const Settings = ({ id }) => {
   return (
     <div
       id={id}
-      className="z-50 fixed min-h-screen w-screen md:w-3/4 lg:w-2/3 -translate-x-full ease-in-out duration-500 transition text-white font-armata invisible"
+      className="z-50 fixed min-h-screen w-screen -translate-x-full ease-in-out duration-500 transition text-white font-armata invisible"
     >
-      <CloseIcon handleClick={hideSettings} onTouchEnd={hideSettings} />
+      <CloseIcon handleClick={hideSettings} />
       <main className="min-h-screen bg-darkest flex flex-col items-center justify-center">
         <SettingsH1 text="Offworld" />
         <SettingsH2 text="Settings" />
