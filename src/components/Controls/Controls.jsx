@@ -28,9 +28,9 @@ const Controls = ({ settingsId, helpId }) => {
     toggleClass(playId, "animate-pulse");
   };
 
-  const toggleSettingsVisibility = () => {
-    toggleClass(settingsId, "invisible");
-    toggleClass(settingsId, "-translate-x-full");
+  const toggleVisibility = (id) => {
+    toggleClass(id, "invisible");
+    toggleClass(id, "-translate-x-full");
   };
 
   return (
@@ -41,14 +41,14 @@ const Controls = ({ settingsId, helpId }) => {
         addStyles="top-[10.5rem]"
         icon={<HelpIcon />}
         text="Help"
-        handleClick={() => toggleClass(helpId, "hidden")}
+        handleClick={() => toggleVisibility(helpId)}
       />
       <LeftFixedIconButton
         id={openSettingsId}
         addStyles="top-[14rem]"
         icon={<SettingsIcon />}
         text="Settings"
-        handleClick={toggleSettingsVisibility}
+        handleClick={() => toggleVisibility(settingsId)}
       />
       <LeftFixedIconButton
         id={playId}

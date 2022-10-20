@@ -1,20 +1,24 @@
 import { useKeyboard } from "../../hooks/useKeyboard";
-import { toggleClass } from "../../utils/classList";
-import { HelpP } from "./components/HelpP";
 import { CloseIcon } from "../Icons";
 import { SettingsH2 } from "../Settings/components/SettingsHeaders";
 
+const HelpP = ({ children }) => {
+  return <p className="max-w-md pb-4 text-justify m-1">{children}</p>
+}
+
 const Help = ({ id }) => {
-  useKeyboard("Escape", () =>
-    document.getElementById(id).classList.add("hidden")
-  );
+  const hideSettings = () => {
+    document.getElementById(id).classList.add("invisible", "-translate-x-full");
+  };
+
+  useKeyboard("Escape", hideSettings);
 
   return (
     <div
       id={id}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center hidden bg-darkest text-white font-armata overflow-y-auto"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center -translate-x-full ease-in-out duration-500 transition invisible bg-darkest text-white font-armata overflow-y-auto"
     >
-      <CloseIcon handleClick={() => toggleClass(id, "hidden")} />
+      <CloseIcon handleClick={hideSettings} />
       <div className="overflow-y-auto p-12">
         <SettingsH2 text="Thoughts, tips, and tricks" />
         <HelpP>
