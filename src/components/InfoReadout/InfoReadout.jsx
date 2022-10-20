@@ -7,7 +7,7 @@ const InfoReadout = ({ x, y }) => {
     <LeftFixedContainer addStyles="top-20">
       <InfoIcon />
       <div className="px-3">
-        <p>{`${x}, ${y}`}</p>
+        <p>{`${Number.parseInt(x)}, ${Number.parseInt(y)}`}</p>
         <PlayerDetails />
       </div>
     </LeftFixedContainer>
