@@ -2,11 +2,12 @@ import { useRef } from "react";
 import { useAtom } from "jotai";
 import { audioAtom } from "../../../stores/audio-engine-store";
 import { CheckIcon } from "../../Icons";
-import SettingsButton from "./SettingsButton";
+import { SettingsButton } from "./SettingsButton";
 import SettingsListItem from "./SettingsListItem";
 
-const allowedFiletypes = ["pcm", "wav", "mp3", "aiff", "aac", "ogg", "flac", "alac"]
-const AudioUpload = () => {
+const allowedFiletypes = ["pcm", "wav", "mp3", "aiff", "aac", "ogg", "flac", "alac"];
+
+export default function AudioUpload() {
   const inputRef = useRef();
   const setAudioAtom = useAtom(audioAtom)[1];
 
@@ -40,5 +41,3 @@ const AudioUpload = () => {
     </SettingsListItem>
   );
 };
-
-export default AudioUpload;

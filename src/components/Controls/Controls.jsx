@@ -9,7 +9,7 @@ import Toolbar from "./components/Toolbar";
 import LeftFixedIconButton from "../LeftFixedIconButton";
 import { HelpIcon, PlayIcon, SettingsIcon, StopIcon } from "./components/Icons";
 
-const Controls = ({ settingsId, helpId }) => {
+export default function Controls({ settingsId, helpId }) {
   const [player] = useAtom(playerAtom);
   const openSettingsId = useId();
   const openHelpId = useId();
@@ -67,5 +67,3 @@ const Controls = ({ settingsId, helpId }) => {
     </Nav>
   );
 };
-
-export default Controls;

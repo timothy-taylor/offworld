@@ -6,7 +6,7 @@ import { toggleClass } from "../utils/classList";
 const containerStyle =
   "fixed inset-3 bg-slate-300 z-[100] flex flex-col items-center justify-center font-mono m-8 p-8";
 
-const Warning = () => {
+export default function Warning() {
   const id = useId();
 
   useKeyboard("Escape", () => document.getElementById(id).classList.add("hidden"));
@@ -31,5 +31,3 @@ const Warning = () => {
     </div>
   );
 };
-
-export default Warning;

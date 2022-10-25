@@ -2,9 +2,8 @@ import { atom } from "jotai";
 import createAudioEngine from "../lib/audio-engine";
 import { loadAudio } from "../lib/load-assets";
 
-
 //
-// audio engine state is set here at compilation and is read-only
+// audio engine state is set here is read-only
 const player = createAudioEngine();
 const playerAtomPrimitive = atom(player);
 export const playerAtom = atom((get) => get(playerAtomPrimitive));
@@ -19,6 +18,8 @@ export const audioAtom = atom(
     set(audioAtomPrimitive, newAudioFile);
     await player.updateBuffer(newAudioFile);
 
+    //
+    // in the Settings component
     document.getElementById("audio-check").classList.remove("hidden");
   }
 );

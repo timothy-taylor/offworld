@@ -1,3 +1,1 @@
-const Nav = ({ children }) => <nav>{children}</nav>;
-
-export default Nav;
+export default ({ children }) => <nav>{children}</nav>;

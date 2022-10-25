@@ -5,9 +5,9 @@ import { audioAtom } from "../../../stores/audio-engine-store";
 import { useGetSupabase } from "../../../hooks/useGetSupabase";
 import { userAtom } from "../../../stores/user-store";
 import SettingsListItem from "./SettingsListItem";
-import SettingsButton from "./SettingsButton";
+import { SettingsButton } from "./SettingsButton";
 
-const LoadPreset = () => {
+export default function LoadPreset() {
   const [filename, setFilename] = useState("");
   const [user] = useAtom(userAtom);
   const setAudioAtom = useAtom(audioAtom)[1];
@@ -53,5 +53,3 @@ const LoadPreset = () => {
     </SettingsListItem>
   );
 };
-
-export default LoadPreset;

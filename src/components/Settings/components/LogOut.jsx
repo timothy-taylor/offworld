@@ -1,10 +1,10 @@
 import { useAtom } from "jotai";
 import { supabase } from "../../../lib/supabase-client";
 import { userAtom } from "../../../stores/user-store";
-import SettingsButton from "./SettingsButton";
+import { SettingsButton } from "./SettingsButton";
 import SettingsListItem from "./SettingsListItem";
 
-const LogOut = ({ email }) => {
+export default function LogOut({ email }) {
   const checkForUser = useAtom(userAtom)[1];
 
   const handleLogout = async () => {
@@ -18,5 +18,3 @@ const LogOut = ({ email }) => {
     </SettingsListItem>
   );
 };
-
-export default LogOut;

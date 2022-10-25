@@ -3,9 +3,9 @@ import { useAtom } from "jotai";
 import { CheckIcon } from "../../Icons";
 import { imageAtom } from "../../../stores/canvas-store";
 import SettingsListItem from "./SettingsListItem";
-import SettingsButton from "./SettingsButton";
+import { SettingsButton } from "./SettingsButton";
 
-const ImageUpload = () => {
+export default function ImageUpload() {
   const inputRef = useRef();
   const setImage = useAtom(imageAtom)[1];
 
@@ -35,5 +35,3 @@ const ImageUpload = () => {
     </SettingsListItem>
   );
 };
-
-export default ImageUpload;

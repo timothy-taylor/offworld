@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-const MainCanvas = forwardRef(({ handleMove }, ref) => (
+export default forwardRef(({ handleMove }, ref) => (
   <canvas
     className="z-0 cursor-crosshair select-none"
     ref={ref}
@@ -12,5 +12,3 @@ const MainCanvas = forwardRef(({ handleMove }, ref) => (
     onTouchEnd={handleMove}
   />
 ));
-
-export default MainCanvas;

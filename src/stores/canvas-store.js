@@ -7,6 +7,8 @@ export const imageAtom = atom(
   (_, set, newImageFile) => {
     set(imageAtomPrimitive, newImageFile);
 
+    //
+    // in Settings component
     document.getElementById("image-check").classList.remove("hidden");
   }
 );

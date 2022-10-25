@@ -1,17 +1,16 @@
 import { useAtom } from "jotai";
 import { playerAtom } from "../../../stores/audio-engine-store";
 
-const PlayerDetails = () => {
+const padZero = (x) => String(x).padStart(3, "0");
+
+export default function PlayerDetails() {
   const [player] = useAtom(playerAtom);
-  const grains = Math.floor(player.synth.grainSize);
-  const overlaps = player.synth.overlap;
+  const grains = padZero(Math.floor(player.synth.grainSize));
+  const overlaps = padZero(player.synth.overlap);
 
   return (
     <p>
-      {`${grains < 10 ? "0" + grains : grains}, 
-      ${overlaps < 10 ? "0" + overlaps : overlaps}`}
+      {grains + ", " + overlaps}
     </p>
   );
 };
-
-export default PlayerDetails;

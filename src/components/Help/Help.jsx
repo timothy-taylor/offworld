@@ -6,18 +6,17 @@ const HelpP = ({ children }) => {
   return <p className="max-w-md pb-4 text-justify m-1">{children}</p>
 }
 
-const Help = ({ id }) => {
-  const hideSettings = () => {
-    document.getElementById(id).classList.add("invisible", "-translate-x-full");
-  };
-
+export default function Help({ id }) {
   useKeyboard("Escape", hideSettings);
 
+  function hideSettings() {
+    document.getElementById(id).classList.add("invisible", "-translate-x-full");
+  }
+
+  const containerStyle = "fixed inset-0 z-50 flex flex-col items-center justify-center -translate-x-full ease-in-out"
+                         + " duration-500 transition invisible bg-darkest text-white font-armata overflow-y-auto";
   return (
-    <div
-      id={id}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center -translate-x-full ease-in-out duration-500 transition invisible bg-darkest text-white font-armata overflow-y-auto"
-    >
+    <div id={id} className={containerStyle}>
       <CloseIcon handleClick={hideSettings} />
       <div className="overflow-y-auto p-12">
         <SettingsH2 text="Thoughts, tips, and tricks" />
@@ -47,5 +46,3 @@ const Help = ({ id }) => {
     </div>
   );
 };
-
-export default Help;

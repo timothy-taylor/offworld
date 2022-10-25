@@ -15,7 +15,7 @@ import {
   ReverbIcon,
 } from "./Icons";
 
-const Toolbar = () => {
+export default function Toolbar() {
   const [isReverb, toggleReverb] = useAtom(isReverbAtom);
   const [isDelay, toggleDelay] = useAtom(isDelayAtom);
   const [isReverse, toggleReverse] = useAtom(isReverseAtom);
@@ -61,5 +61,3 @@ const Toolbar = () => {
     </LeftFixedContainer>
   );
 };
-
-export default Toolbar;

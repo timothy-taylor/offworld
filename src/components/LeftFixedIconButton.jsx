@@ -4,17 +4,13 @@ const baseStyles =
 
 //
 // at least one of the addStyles needs to be "top-[x]" to vertical position of the button
-const LeftFixedIconButton = ({ id, addStyles, handleClick, icon, text }) => {
-  return (
-    <button
-      id={id}
-      className={`${baseStyles} ${addStyles}`}
-      onClick={handleClick}
-    >
-      {icon}
-      <span className="pl-2">{text}</span>
-    </button>
-  );
-};
-
-export default LeftFixedIconButton;
+export default ({ id, addStyles, handleClick, icon, text }) => (
+  <button
+    id={id}
+    className={`${baseStyles} ${addStyles}`}
+    onClick={handleClick}
+  >
+    {icon}
+    <span className="pl-2">{text}</span>
+  </button>
+);

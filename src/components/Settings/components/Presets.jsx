@@ -5,7 +5,7 @@ import { userAtom } from "../../../stores/user-store";
 import { supabase } from "../../../lib/supabase-client";
 import { useGetSupabase } from "../../../hooks/useGetSupabase";
 import SettingsListItem from "./SettingsListItem";
-import SettingsButton from "./SettingsButton";
+import { SettingsButton } from "./SettingsButton";
 
 const createPresetData = (id) => [
   {
@@ -48,7 +48,7 @@ const downloadFile = async (filename) => {
   return await file.text();
 };
 
-const Presets = () => {
+export default function Presets() {
   const [user] = useAtom(userAtom);
   const [currentAudio, setCurrentAudio] = useAtom(audioAtom);
   const [currentImage, setCurrentImage] = useAtom(imageAtom);
@@ -96,5 +96,3 @@ const Presets = () => {
     </>
   );
 };
-
-export default Presets;

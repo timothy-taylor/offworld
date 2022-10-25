@@ -11,24 +11,23 @@ import { SettingsH1, SettingsH2 } from "./components/SettingsHeaders";
 import LogOut from "./components/LogOut";
 import ImageUpload from "./components/ImageUpload";
 import AudioUpload from "./components/AudioUpload";
-import SettingsButton from "./components/SettingsButton";
+import { SettingsButton } from "./components/SettingsButton";
 import SettingsListItem from "./components/SettingsListItem";
 
-const Settings = ({ id }) => {
+export default function Settings({ id }) {
   const [user, checkForUser] = useAtom(userAtom);
   const [attemptLogin, setAttemptLogin] = useState(false);
+  useKeyboard("Escape", hideSettings);
 
-  const hideSettings = () => {
+  function hideSettings() {
     document.getElementById(id).classList.add("invisible", "-translate-x-full")
   }
-
-  useKeyboard("Escape", hideSettings);
 
   //
   // to insure we are not fetching against supabase
   // unnecessarily, let's make sure users
   // actually want authenticated functionality first
-  const LoginConditions = () => {
+  const RenderLogin = () => {
     if (attemptLogin || user)
       return user ? <LogOut email={user.email} /> : <LogIn />;
 
@@ -45,18 +44,18 @@ const Settings = ({ id }) => {
     );
   };
 
+  const containerStyle = "z-50 fixed min-h-screen w-screen -translate-x-full ease-in-out duration-500 transition"
+                         + " text-white font-armata invisible"
+
   return (
-    <div
-      id={id}
-      className="z-50 fixed min-h-screen w-screen -translate-x-full ease-in-out duration-500 transition text-white font-armata invisible"
-    >
+    <div id={id} className={containerStyle}>
       <CloseIcon handleClick={hideSettings} />
       <main className="min-h-screen bg-darkest flex flex-col items-center justify-center">
         <SettingsH1 text="Offworld" />
         <SettingsH2 text="Settings" />
 
         <ul>
-          {LoginConditions()}
+          {RenderLogin()}
           <ImageUpload />
           <AudioUpload />
           {user && <Presets />}
@@ -65,5 +64,3 @@ const Settings = ({ id }) => {
     </div>
   );
 };
-
-export default Settings;

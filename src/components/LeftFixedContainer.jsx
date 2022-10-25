@@ -4,8 +4,6 @@ const baseStyle =
 
 //
 // at least one of the addStyles needs to be "top-[x]" to position the container vertically
-const LeftFixedContainer = ({ addStyles, children }) => {
+export default ({ addStyles, children }) => {
   return <div className={`${baseStyle} ${addStyles}`}>{children}</div>;
 };
-
-export default LeftFixedContainer;

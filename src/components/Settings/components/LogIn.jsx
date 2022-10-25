@@ -2,7 +2,7 @@ import { useState } from "react";
 import { supabase } from "../../../lib/supabase-client";
 import { SettingsButtonSubmit } from "./SettingsButton";
 
-const LogIn = () => {
+export default function LogIn() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");
 
@@ -34,5 +34,3 @@ const LogIn = () => {
     </form>
   );
 };
-
-export default LogIn;
