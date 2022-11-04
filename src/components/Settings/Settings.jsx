@@ -15,12 +15,13 @@ import { SettingsButton } from "./components/SettingsButton";
 import SettingsListItem from "./components/SettingsListItem";
 
 export default function Settings({ id }) {
-  const [user, checkForUser] = useAtom(userAtom);
-  const [attemptLogin, setAttemptLogin] = useState(false);
+  const [user, checkForUser] = useAtom(userAtom),
+    [attemptLogin, setAttemptLogin] = useState(false);
+
   useKeyboard("Escape", hideSettings);
 
   function hideSettings() {
-    document.getElementById(id).classList.add("invisible", "-translate-x-full")
+    document.getElementById(id).classList.add("invisible", "-translate-x-full");
   }
 
   //
@@ -44,8 +45,9 @@ export default function Settings({ id }) {
     );
   };
 
-  const containerStyle = "z-50 fixed min-h-screen w-screen -translate-x-full ease-in-out duration-500 transition"
-                         + " text-white font-armata invisible"
+  const containerStyle =
+    "z-50 fixed min-h-screen w-screen -translate-x-full ease-in-out duration-500 transition" +
+    " text-white font-armata invisible";
 
   return (
     <div id={id} className={containerStyle}>

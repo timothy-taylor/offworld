@@ -2,9 +2,7 @@ import { useKeyboard } from "../../hooks/useKeyboard";
 import { CloseIcon } from "../Icons";
 import { SettingsH2 } from "../Settings/components/SettingsHeaders";
 
-const HelpP = ({ children }) => {
-  return <p className="max-w-md pb-4 text-justify m-1">{children}</p>
-}
+const Text = ({ children }) => <p className="max-w-md pb-4 text-justify m-1">{children}</p>
 
 export default function Help({ id }) {
   useKeyboard("Escape", hideSettings);
@@ -20,28 +18,28 @@ export default function Help({ id }) {
       <CloseIcon handleClick={hideSettings} />
       <div className="overflow-y-auto p-12">
         <SettingsH2 text="Thoughts, tips, and tricks" />
-        <HelpP>
+        <Text>
           Offworld is a granular synthesizer. It works by loading an audio
           sample and playing it back in unique ways.
-        </HelpP>
-        <HelpP>
+        </Text>
+        <Text>
           You can steer the playback of the synthesizer by navigating image data
           of the image loaded into the application by using the mouse. The
           pixelated region that the audio engine is using for data is shown in
           the bottom right-hand corner.
-        </HelpP>
-        <HelpP>
+        </Text>
+        <Text>
           Unfortunately, the current state of Offworld is not a11y friendly.
           Attempts are being made to rectify this.
-        </HelpP>
-        <HelpP>
+        </Text>
+        <Text>
           If you'd like signup as user, you can save audio/visual combinations
           as presets for quick loads and swaps.
-        </HelpP>
-        <HelpP>
+        </Text>
+        <Text>
           You can close 'modal' style windows (like this one or any one that has
           an X icon in the top-right corner) by pressing escape.
-        </HelpP>
+        </Text>
       </div>
     </div>
   );

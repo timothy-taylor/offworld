@@ -4,8 +4,8 @@ import { loadAudio } from "../lib/load-assets";
 
 //
 // audio engine state is set here is read-only
-const player = createAudioEngine();
-const playerAtomPrimitive = atom(player);
+const player = createAudioEngine(),
+  playerAtomPrimitive = atom(player);
 export const playerAtom = atom((get) => get(playerAtomPrimitive));
 
 //
@@ -33,9 +33,9 @@ const isDelayPrimitive = atom(false);
 export const isDelayAtom = atom(
   (get) => get(isDelayPrimitive),
   (get, set, newValue) => {
-    const isDelayCurrent = get(isDelayPrimitive);
-    const isReverbCurrent = get(isReverbAtom);
-    const update = newValue ?? !isDelayCurrent;
+    const isDelayCurrent = get(isDelayPrimitive),
+      isReverbCurrent = get(isReverbAtom),
+      update = newValue ?? !isDelayCurrent;
 
     set(isDelayPrimitive, update);
     player.setDelay(update, isReverbCurrent);
@@ -46,8 +46,8 @@ const isReverbPrimitive = atom(true);
 export const isReverbAtom = atom(
   (get) => get(isReverbPrimitive),
   (get, set, newValue) => {
-    const isDelayCurrent = get(isDelayAtom);
-    const update = newValue ?? !get(isReverbPrimitive);
+    const isDelayCurrent = get(isDelayAtom),
+      update = newValue ?? !get(isReverbPrimitive);
 
     set(isReverbPrimitive, update);
     player.setReverb(update, isDelayCurrent);

@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { useKeyboard } from "../hooks/useKeyboard";
 import { CloseIcon, WarningIcon } from "./Icons";
-import { toggleClass } from "../utils/classList";
+import { toggleClass } from "../lib/utils";
 
 const containerStyle =
   "fixed inset-3 bg-slate-300 z-[100] flex flex-col items-center justify-center font-mono m-8 p-8";

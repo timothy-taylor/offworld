@@ -5,22 +5,22 @@ const createAudioEngine = () => {
   //
   // granular engine setup
   let lengthSec = 25;
-  const buffer = new Tone.ToneAudioBuffer(loadAudio());
-  const limiter = new Tone.Limiter(-32).toDestination();
-  const crossfadePost = new Tone.CrossFade(0.25).connect(limiter);
-  const crossfadePre = new Tone.CrossFade(0).connect(crossfadePost.a);
-  const reverb = new Tone.Reverb().connect(crossfadePre.a);
-  const delay = new Tone.PingPongDelay(0.52, 0.3).connect(crossfadePre.b);
-  const player = new Tone.GrainPlayer({
-    url: buffer,
-    loop: true,
-    reverse: false,
-    playbackRate: 2.0,
-    grainSize: 0.2,
-    overlap: 0.2,
-    loopStart: 0.0,
-    loopEnd: 1.0,
-  });
+  const buffer = new Tone.ToneAudioBuffer(loadAudio()),
+    limiter = new Tone.Limiter(-32).toDestination(),
+    crossfadePost = new Tone.CrossFade(0.25).connect(limiter),
+    crossfadePre = new Tone.CrossFade(0).connect(crossfadePost.a),
+    reverb = new Tone.Reverb().connect(crossfadePre.a),
+    delay = new Tone.PingPongDelay(0.52, 0.3).connect(crossfadePre.b),
+    player = new Tone.GrainPlayer({
+      url: buffer,
+      loop: true,
+      reverse: false,
+      playbackRate: 2.0,
+      grainSize: 0.2,
+      overlap: 0.2,
+      loopStart: 0.0,
+      loopEnd: 1.0,
+    });
   player.connect(reverb);
   player.connect(delay);
   player.connect(crossfadePost.b);

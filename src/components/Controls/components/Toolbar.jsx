@@ -16,9 +16,9 @@ import {
 } from "./Icons";
 
 export default function Toolbar() {
-  const [isReverb, toggleReverb] = useAtom(isReverbAtom);
-  const [isDelay, toggleDelay] = useAtom(isDelayAtom);
-  const [isReverse, toggleReverse] = useAtom(isReverseAtom);
+  const [isReverb, toggleReverb] = useAtom(isReverbAtom),
+    [isDelay, toggleDelay] = useAtom(isDelayAtom),
+    [isReverse, toggleReverse] = useAtom(isReverseAtom);
 
   const reverb = () =>
     isReverb ? (

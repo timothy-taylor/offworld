@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 // cb is a supabase postgres query closure,
 // ie: () => supabase.from("posts").select("*")
 export const useGetSupabase = (cb) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(undefined);
+  const [data, setData] = useState([]),
+    [loading, setLoading] = useState(true),
+    [error, setError] = useState(undefined);
 
   useEffect(() => {
     const getData = async () => {

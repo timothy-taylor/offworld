@@ -14,8 +14,8 @@ import Help from "./components/Help";
 import Settings from "./components/Settings";
 
 const App = () => {
-  const settingsId = useId();
-  const helpId = useId();
+  const settingsWindowId = useId(),
+    helpWindowId = useId();
 
   //
   // mouse coordinates to pass to <InfoReadout />
@@ -23,25 +23,26 @@ const App = () => {
 
   //
   // refs to attach to <canvas> tags
-  const mainRef = useRef();
-  const zoomRef = useRef();
+  const mainRef = useRef(),
+    zoomRef = useRef();
 
   //
   // global store getters
-  const [player] = useAtom(playerAtom);
-  const [image] = useAtom(imageAtom);
+  const [player] = useAtom(playerAtom),
+    [image] = useAtom(imageAtom);
 
   const drawZoom = (x, y) => {
-    const el = mainRef.current;
-    const ctx = zoomRef.current.getContext("2d");
+    const ctx = zoomRef.current.getContext("2d"),
+      mainCanvas = mainRef.current;
+
     ctx.imageSmoothingEnabled = false;
     ctx.mozImageSmoothingEnabled = false;
     ctx.webkitImageSmoothingEnabled = false;
     ctx.msImageSmoothingEnabled = false;
     ctx.drawImage(
-      el,
-      Math.min(Math.max(0, x - 5), el.width - 10),
-      Math.min(Math.max(0, y - 5), el.height - 10),
+      mainCanvas,
+      Math.min(Math.max(0, x - 5), mainCanvas.width - 10),
+      Math.min(Math.max(0, y - 5), mainCanvas.height - 10),
       8,
       8,
       0,
@@ -52,16 +53,12 @@ const App = () => {
   };
 
   const handleMove = (e) => {
-    let x, y;
-    if (e?.touches) {
-      x = e.touches.item(0).pageX;
-      y = e.touches.item(0).pageY;
-    } else {
-      x = e.pageX;
-      y = e.pageY;
-    }
-    const ctx = mainRef.current.getContext("2d");
-    const { data } = ctx.getImageData(x, y, 1, 1);
+    const x = e?.touches?.item(0).pageX ?? e.pageX,
+      y = e?.touches?.item(0).pageY ?? e.pageY;
+
+    const ctx = mainRef.current.getContext("2d"),
+      { data } = ctx.getImageData(x, y, 1, 1);
+
     drawZoom(x, y);
     player.updateParams(data, x, y);
     setCoordinates({ x, y });
@@ -79,9 +76,10 @@ const App = () => {
   // draw background on mount, window resize, or image change
   useEffect(() => {
     const drawCanvas = () => {
-      const el = mainRef.current;
-      const ctx = el.getContext("2d");
-      const img = new Image();
+      const el = mainRef.current,
+        ctx = el.getContext("2d"),
+        img = new Image();
+
       img.crossOrigin = "anonymous";
       img.src = image;
       img.onload = () => {
@@ -98,13 +96,10 @@ const App = () => {
 
     //
     // initially draw our canvases
-    drawZoom(100,100)
+    drawZoom(100, 100);
     drawCanvas();
 
-    //
-    // and then handle window resize
     window.addEventListener("resize", drawCanvas);
-
     return () => {
       window.removeEventListener("resize", drawCanvas);
     };
@@ -113,15 +108,14 @@ const App = () => {
   return (
     <main className="w-screen h-screen overflow-hidden overscroll-contain">
       <Warning />
-      <Controls settingsId={settingsId} helpId={helpId} />
+      <Controls settingsId={settingsWindowId} helpId={helpWindowId} />
       <InfoReadout x={coordinates.x} y={coordinates.y} />
-      <Settings id={settingsId} />
-      <Help id={helpId} />
+      <Settings id={settingsWindowId} />
+      <Help id={helpWindowId} />
       <MainCanvas ref={mainRef} handleMove={handleMove} />
       <Zoom ref={zoomRef} />
       <Footer />
     </main>
   );
 };
-
 export default App;

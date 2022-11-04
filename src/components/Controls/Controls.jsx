@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { useAtom } from "jotai";
 import { playerAtom } from "../../stores/audio-engine-store";
-import { toggleClass } from "../../utils/classList";
+import { toggleClass } from "../../lib/utils";
 
 // components
 import Nav from "../Nav";
@@ -10,11 +10,11 @@ import LeftFixedIconButton from "../LeftFixedIconButton";
 import { HelpIcon, PlayIcon, SettingsIcon, StopIcon } from "./components/Icons";
 
 export default function Controls({ settingsId, helpId }) {
-  const [player] = useAtom(playerAtom);
-  const openSettingsId = useId();
-  const openHelpId = useId();
-  const playId = useId();
-  const stopId = useId();
+  const [player] = useAtom(playerAtom),
+    openSettingsId = useId(),
+    openHelpId = useId(),
+    playId = useId(),
+    stopId = useId();
 
   const handlePlay = () => {
     player.handleExplore().catch((err) => console.error(err));
