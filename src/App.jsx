@@ -7,8 +7,8 @@ import { imageAtom } from "./stores/canvas-store";
 import Warning from "./components/Warning";
 import Controls from "./components/Controls";
 import InfoReadout from "./components/InfoReadout";
-import MainCanvas from "./components/MainCanvas";
-import Zoom from "./components/Zoom";
+import MainCanvas from "./components/Canvas/MainCanvas";
+import Zoom from "./components/Canvas/Zoom";
 import Footer from "./components/Footer";
 import Help from "./components/Help";
 import Settings from "./components/Settings";
@@ -53,6 +53,8 @@ const App = () => {
   };
 
   const handleMove = (e) => {
+    //
+    // touchscreen or mouse
     const x = e?.touches?.item(0).pageX ?? e.pageX,
       y = e?.touches?.item(0).pageY ?? e.pageY;
 

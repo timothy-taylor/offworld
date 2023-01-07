@@ -5,7 +5,7 @@ import {
   isReverseAtom,
 } from "../../../stores/audio-engine-store";
 import LeftFixedContainer from "../../LeftFixedContainer";
-import RenderWithTooltip from "../../RenderWithTooltip";
+import RenderWithTooltip from "./RenderWithTooltip";
 import {
   BackwardIcon,
   DelayIcon,
@@ -43,6 +43,7 @@ export default function Toolbar() {
 
   return (
     <LeftFixedContainer addStyles="top-10">
+{/*       rewrite this component to include the child component as a prop rather than an actual child */}
       <RenderWithTooltip
         tooltipText={`reverb: ${isReverb ? "on" : "off"} [toggle]`}
       >

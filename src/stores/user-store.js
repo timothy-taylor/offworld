@@ -4,6 +4,7 @@ import { supabase } from "../lib/supabase-client";
 export const checkForUser = async () => {
   const { data, error } = await supabase.auth.getUser();
   if (error) console.log("Not logged in", error);
+  console.log(data.user)
   return data.user;
 };
 

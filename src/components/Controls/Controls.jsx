@@ -4,7 +4,6 @@ import { playerAtom } from "../../stores/audio-engine-store";
 import { toggleClass } from "../../lib/utils";
 
 // components
-import Nav from "../Nav";
 import Toolbar from "./components/Toolbar";
 import LeftFixedIconButton from "../LeftFixedIconButton";
 import { HelpIcon, PlayIcon, SettingsIcon, StopIcon } from "./components/Icons";
@@ -34,7 +33,7 @@ export default function Controls({ settingsId, helpId }) {
   };
 
   return (
-    <Nav>
+    <nav>
       <Toolbar />
       <LeftFixedIconButton
         id={openHelpId}
@@ -64,6 +63,6 @@ export default function Controls({ settingsId, helpId }) {
         text="Abort"
         handleClick={handleStop}
       />
-    </Nav>
+    </nav>
   );
 };

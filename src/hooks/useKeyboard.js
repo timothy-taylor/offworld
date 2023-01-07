@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-export const useKeyboard = (key, handler) => {
+export const useKeyboard = (key, callback) => {
   const keyUpHandler = (e) => {
-    if (e.key === key) handler();
+    if (e.key === key) callback();
   };
 
   useEffect(() => {
