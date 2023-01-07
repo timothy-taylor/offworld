@@ -22,7 +22,7 @@ const App = () => {
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
 
   //
-  // refs to attach to <canvas> tags
+  // refs to attach to <canvas> elements
   const mainRef = useRef(),
     zoomRef = useRef();
 
@@ -58,7 +58,7 @@ const App = () => {
     const x = e?.touches?.item(0).pageX ?? e.pageX,
       y = e?.touches?.item(0).pageY ?? e.pageY;
 
-    const ctx = mainRef.current.getContext("2d"),
+    const ctx = mainRef.current.getContext("2d", { willReadFrequently: true }),
       { data } = ctx.getImageData(x, y, 1, 1);
 
     drawZoom(x, y);

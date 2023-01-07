@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../../lib/supabase-client";
+import SettingsListItem from "./SettingsListItem";
 import { SettingsButtonSubmit } from "./SettingsButton";
 
 export default function LogIn() {
@@ -9,28 +10,26 @@ export default function LogIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await supabase.auth.signInWithOtp({ email });
-      setEmail("");
-      setStatus("Please check your email");
-    } catch (e) {
-      console.error("Supabase magic link login: ", e);
-    }
+    const { data } = await supabase.auth.signInWithOtp({ email });
+    setEmail("");
+    setStatus(data.user ? "Please check your email" : "Something went wrong");
   };
 
-  if (status.length > 0) return <div>{status}</div>;
+  if (status.length) return <SettingsListItem text={status} />;
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        className="text-black"
-        type="email"
-        placeholder="email@example.com"
-        maxLength="64"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <SettingsButtonSubmit text="Sign up / Log in" />
-    </form>
+    <SettingsListItem>
+      <form onSubmit={handleSubmit}>
+        <input
+          className="text-black"
+          type="email"
+          placeholder="email@example.com"
+          maxLength="64"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <SettingsButtonSubmit text="Sign up / Log in" />
+      </form>
+    </SettingsListItem>
   );
-};
+}

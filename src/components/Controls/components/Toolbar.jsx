@@ -45,17 +45,17 @@ export default function Toolbar() {
     <LeftFixedContainer addStyles="top-10">
 {/*       rewrite this component to include the child component as a prop rather than an actual child */}
       <RenderWithTooltip
-        tooltipText={`reverb: ${isReverb ? "on" : "off"} [toggle]`}
+        tooltipText={`reverb: ${isReverb ? "on" : "off"}`}
       >
         {reverb()}
       </RenderWithTooltip>
       <RenderWithTooltip
-        tooltipText={`delay: ${isDelay ? "on" : "off"} [toggle]`}
+        tooltipText={`delay: ${isDelay ? "on" : "off"}`}
       >
         {delay()}
       </RenderWithTooltip>
       <RenderWithTooltip
-        tooltipText={`reverse: ${isReverse ? "on" : "off"} [toggle]`}
+        tooltipText={`reverse: ${isReverse ? "on" : "off"}`}
       >
         {reverse()}
       </RenderWithTooltip>

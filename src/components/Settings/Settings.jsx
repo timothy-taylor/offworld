@@ -13,10 +13,12 @@ import ImageUpload from "./components/ImageUpload";
 import AudioUpload from "./components/AudioUpload";
 import { SettingsButton } from "./components/SettingsButton";
 import SettingsListItem from "./components/SettingsListItem";
+import { AuthRetryableFetchError } from "@supabase/supabase-js";
 
 export default function Settings({ id }) {
   const [user, checkForUser] = useAtom(userAtom),
-    [attemptLogin, setAttemptLogin] = useState(false);
+    [attemptLogin, setAttemptLogin] = useState(false),
+    [hasSupabaseConnection, setHasSupabaseConnection] = useState(true);
 
   useKeyboard("Escape", hideSettings);
 
@@ -29,6 +31,7 @@ export default function Settings({ id }) {
   // unnecessarily, let's make sure users
   // actually want authenticated functionality first
   const RenderLogin = () => {
+    if (!hasSupabaseConnection) return <SettingsListItem text="Something went wrong" />
     if (attemptLogin || user)
       return user ? <LogOut email={user.email} /> : <LogIn />;
 
@@ -38,7 +41,9 @@ export default function Settings({ id }) {
           text="Sign-up / Log-in"
           handleClick={() => {
             setAttemptLogin(true);
-            checkForUser().catch((err) => console.error(err));
+            const { error } = checkForUser();
+            if (error instanceof AuthRetryableFetchError) 
+              setHasSupabaseConnection(false)
           }}
         />
       </SettingsListItem>
@@ -56,7 +61,7 @@ export default function Settings({ id }) {
         <SettingsH1 text="Offworld" />
         <SettingsH2 text="Settings" />
 
-        <ul>
+        <ul className="flex flex-col gap-y-4">
           {RenderLogin()}
           <ImageUpload />
           <AudioUpload />
