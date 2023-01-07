@@ -39,11 +39,16 @@ export default function Settings({ id }) {
       <SettingsListItem text="User">
         <SettingsButton
           text="Sign-up / Log-in"
-          handleClick={() => {
-            setAttemptLogin(true);
-            const { error } = checkForUser();
+          handleClick={async () => {
+            const { error } = await checkForUser();
+
+            // since I'm a free plan of supabase,
+            // the database often gets paused
+            // this checks for that
             if (error instanceof AuthRetryableFetchError) 
               setHasSupabaseConnection(false)
+
+            setAttemptLogin(true);
           }}
         />
       </SettingsListItem>
