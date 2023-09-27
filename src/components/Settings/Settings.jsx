@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { useKeyboard } from "../../hooks/useKeyboard";
 import { userAtom } from "../../stores/user-store";
 
@@ -15,64 +15,63 @@ import { SettingsButton } from "./components/SettingsButton";
 import SettingsListItem from "./components/SettingsListItem";
 import { AuthRetryableFetchError } from "@supabase/supabase-js";
 
-export default function Settings({ id }) {
-  const [user, checkForUser] = useAtom(userAtom),
-    [attemptLogin, setAttemptLogin] = useState(false),
-    [hasSupabaseConnection, setHasSupabaseConnection] = useState(true);
+const Login = () => {
+    const [user, checkForUser] = useAtom(userAtom),
+        [attemptLogin, setAttemptLogin] = useState(false),
+        [hasSupabaseConnection, setHasSupabaseConnection] = useState(true);
 
-  useKeyboard("Escape", hideSettings);
-
-  function hideSettings() {
-    document.getElementById(id).classList.add("invisible", "-translate-x-full");
-  }
-
-  //
-  // to insure we are not fetching against supabase
-  // unnecessarily, let's make sure users
-  // actually want authenticated functionality first
-  const RenderLogin = () => {
-    if (!hasSupabaseConnection) return <SettingsListItem text="Something went wrong" />
+    if (!hasSupabaseConnection)
+        return <SettingsListItem text="Error connecting to database..." />;
     if (attemptLogin || user)
-      return user ? <LogOut email={user.email} /> : <LogIn />;
+        return user ? <LogOut email={user.email} /> : <LogIn />;
+    return (
+        <SettingsListItem text="User">
+            <SettingsButton
+                text="Sign-up / Log-in"
+                handleClick={async () => {
+                    const { error } = await checkForUser();
+
+                    // since I'm a free plan of supabase,
+                    // the database often gets paused
+                    // this checks for that
+                    if (error instanceof AuthRetryableFetchError)
+                        setHasSupabaseConnection(false);
+
+                    setAttemptLogin(true);
+                }}
+            />
+        </SettingsListItem>
+    );
+};
+
+export default function Settings({ id }) {
+    const user = useAtomValue(userAtom);
+
+    useKeyboard("Escape", hideSettings);
+
+    function hideSettings() {
+        document
+            .getElementById(id)
+            .classList.add("invisible", "-translate-x-full");
+    }
 
     return (
-      <SettingsListItem text="User">
-        <SettingsButton
-          text="Sign-up / Log-in"
-          handleClick={async () => {
-            const { error } = await checkForUser();
+        <div
+            id={id}
+            className="invisible fixed z-50 min-h-screen w-screen -translate-x-full font-armata text-white transition duration-500 ease-in-out"
+        >
+            <CloseIcon handleClick={hideSettings} />
+            <main className="flex min-h-screen flex-col items-center justify-center bg-darkest">
+                <SettingsH1 text="Offworld" />
+                <SettingsH2 text="Config" />
 
-            // since I'm a free plan of supabase,
-            // the database often gets paused
-            // this checks for that
-            if (error instanceof AuthRetryableFetchError) 
-              setHasSupabaseConnection(false)
-
-            setAttemptLogin(true);
-          }}
-        />
-      </SettingsListItem>
+                <ul className="flex flex-col gap-y-4">
+                    <Login />
+                    <ImageUpload />
+                    <AudioUpload />
+                    {user && <Presets />}
+                </ul>
+            </main>
+        </div>
     );
-  };
-
-  const containerStyle =
-    "z-50 fixed min-h-screen w-screen -translate-x-full ease-in-out duration-500 transition" +
-    " text-white font-armata invisible";
-
-  return (
-    <div id={id} className={containerStyle}>
-      <CloseIcon handleClick={hideSettings} />
-      <main className="min-h-screen bg-darkest flex flex-col items-center justify-center">
-        <SettingsH1 text="Offworld" />
-        <SettingsH2 text="Settings" />
-
-        <ul className="flex flex-col gap-y-4">
-          {RenderLogin()}
-          <ImageUpload />
-          <AudioUpload />
-          {user && <Presets />}
-        </ul>
-      </main>
-    </div>
-  );
-};
+}

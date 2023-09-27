@@ -5,7 +5,7 @@ import { loadAudio } from "../lib/load-assets";
 //
 // audio engine state is set here is read-only
 const player = createAudioEngine(),
-  playerAtomPrimitive = atom(player);
+    playerAtomPrimitive = atom(player);
 export const playerAtom = atom((get) => get(playerAtomPrimitive));
 
 //
@@ -13,15 +13,15 @@ export const playerAtom = atom((get) => get(playerAtomPrimitive));
 // is automatically updated on state change
 const audioAtomPrimitive = atom(loadAudio());
 export const audioAtom = atom(
-  (get) => get(audioAtomPrimitive),
-  async (_, set, newAudioFile) => {
-    set(audioAtomPrimitive, newAudioFile);
-    await player.updateBuffer(newAudioFile);
+    (get) => get(audioAtomPrimitive),
+    async (_, set, newAudioFile) => {
+        set(audioAtomPrimitive, newAudioFile);
+        await player.updateBuffer(newAudioFile);
 
-    //
-    // in the Settings component
-    document.getElementById("audio-check").classList.remove("hidden");
-  }
+        //
+        // in the Settings component
+        document.getElementById("audio-check").classList.remove("hidden");
+    },
 );
 
 //
@@ -29,38 +29,38 @@ export const audioAtom = atom(
 // changing the atom automatically updates the synth.
 // since these are boolean values, the set function can be called
 // without any arguments, ie: toggle()
-const isDelayPrimitive = atom(false);
-export const isDelayAtom = atom(
-  (get) => get(isDelayPrimitive),
-  (get, set, newValue) => {
-    const isDelayCurrent = get(isDelayPrimitive),
-      isReverbCurrent = get(isReverbAtom),
-      update = newValue ?? !isDelayCurrent;
+const delayEnabledPrimitive = atom(false);
+export const delayEnabledAtom = atom(
+    (get) => get(delayEnabledPrimitive),
+    (get, set, newValue) => {
+        const isDelayCurrent = get(delayEnabledPrimitive),
+            isReverbCurrent = get(reverbEnabledAtom),
+            update = newValue ?? !isDelayCurrent;
 
-    set(isDelayPrimitive, update);
-    player.setDelay(update, isReverbCurrent);
-  }
+        set(delayEnabledPrimitive, update);
+        player.setDelay(update, isReverbCurrent);
+    },
 );
 
-const isReverbPrimitive = atom(true);
-export const isReverbAtom = atom(
-  (get) => get(isReverbPrimitive),
-  (get, set, newValue) => {
-    const isDelayCurrent = get(isDelayAtom),
-      update = newValue ?? !get(isReverbPrimitive);
+const reverbEnabledPrimitive = atom(true);
+export const reverbEnabledAtom = atom(
+    (get) => get(reverbEnabledPrimitive),
+    (get, set, newValue) => {
+        const isDelayCurrent = get(delayEnabledAtom),
+            update = newValue ?? !get(reverbEnabledPrimitive);
 
-    set(isReverbPrimitive, update);
-    player.setReverb(update, isDelayCurrent);
-  }
+        set(reverbEnabledPrimitive, update);
+        player.setReverb(update, isDelayCurrent);
+    },
 );
 
-const isReversePrimitive = atom(false);
-export const isReverseAtom = atom(
-  (get) => get(isReversePrimitive),
-  (get, set, newValue) => {
-    const update = newValue ?? !get(isReversePrimitive);
+const reverseEnabledPrimitive = atom(false);
+export const reverseEnabledAtom = atom(
+    (get) => get(reverseEnabledPrimitive),
+    (get, set, newValue) => {
+        const update = newValue ?? !get(reverseEnabledPrimitive);
 
-    set(isReversePrimitive, update);
-    player.setReverse(update);
-  }
+        set(reverseEnabledPrimitive, update);
+        player.setReverse(update);
+    },
 );

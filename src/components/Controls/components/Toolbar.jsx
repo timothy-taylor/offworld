@@ -1,64 +1,66 @@
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
-  isDelayAtom,
-  isReverbAtom,
-  isReverseAtom,
+    delayEnabledAtom,
+    reverbEnabledAtom,
+    reverseEnabledAtom,
 } from "../../../stores/audio-engine-store";
 import LeftFixedContainer from "../../LeftFixedContainer";
-import RenderWithTooltip from "./RenderWithTooltip";
+import Tooltip from "./RenderWithTooltip";
 import {
-  BackwardIcon,
-  DelayIcon,
-  DryIcon,
-  ForwardIcon,
-  NoDelayIcon,
-  ReverbIcon,
+    BackwardIcon,
+    DelayIcon,
+    DryIcon,
+    ForwardIcon,
+    NoDelayIcon,
+    ReverbIcon,
 } from "./Icons";
 
-export default function Toolbar() {
-  const [isReverb, toggleReverb] = useAtom(isReverbAtom),
-    [isDelay, toggleDelay] = useAtom(isDelayAtom),
-    [isReverse, toggleReverse] = useAtom(isReverseAtom);
+const Reverb = () => {
+    const [reverbEnabled, toggleReverb] = useAtom(reverbEnabledAtom);
 
-  const reverb = () =>
-    isReverb ? (
-      <ReverbIcon handleClick={toggleReverb} />
+    return reverbEnabled ? (
+        <ReverbIcon handleClick={toggleReverb} />
     ) : (
-      <DryIcon handleClick={toggleReverb} />
+        <DryIcon handleClick={toggleReverb} />
     );
-
-  const delay = () =>
-    isDelay ? (
-      <DelayIcon handleClick={toggleDelay} />
-    ) : (
-      <NoDelayIcon handleClick={toggleDelay} />
-    );
-
-  const reverse = () =>
-    isReverse ? (
-      <BackwardIcon handleClick={toggleReverse} />
-    ) : (
-      <ForwardIcon handleClick={toggleReverse} />
-    );
-
-  return (
-    <LeftFixedContainer addStyles="top-10">
-{/*       rewrite this component to include the child component as a prop rather than an actual child */}
-      <RenderWithTooltip
-        tooltipText={`reverb: ${isReverb ? "on" : "off"}`}
-      >
-        {reverb()}
-      </RenderWithTooltip>
-      <RenderWithTooltip
-        tooltipText={`delay: ${isDelay ? "on" : "off"}`}
-      >
-        {delay()}
-      </RenderWithTooltip>
-      <RenderWithTooltip
-        tooltipText={`reverse: ${isReverse ? "on" : "off"}`}
-      >
-        {reverse()}
-      </RenderWithTooltip>
-    </LeftFixedContainer>
-  );
 };
+
+const Delay = () => {
+    const [delayEnabled, toggleDelay] = useAtom(delayEnabledAtom);
+
+    return delayEnabled ? (
+        <DelayIcon handleClick={toggleDelay} />
+    ) : (
+        <NoDelayIcon handleClick={toggleDelay} />
+    );
+};
+
+const Reverse = () => {
+    const [reverseEnabled, toggleReverse] = useAtom(reverseEnabledAtom);
+
+    return reverseEnabled ? (
+        <BackwardIcon handleClick={toggleReverse} />
+    ) : (
+        <ForwardIcon handleClick={toggleReverse} />
+    );
+};
+
+export default function Toolbar() {
+    const reverbEnabled = useAtomValue(reverbEnabledAtom),
+        delayEnabled = useAtomValue(delayEnabledAtom),
+        reverseEnabled = useAtomValue(reverseEnabledAtom);
+
+    return (
+        <LeftFixedContainer addStyles="top-10">
+            <Tooltip text={`reverb: ${reverbEnabled ? "on" : "off"}`}>
+                <Reverb />
+            </Tooltip>
+            <Tooltip text={`delay: ${delayEnabled ? "on" : "off"}`}>
+                <Delay />
+            </Tooltip>
+            <Tooltip text={`reverse: ${reverseEnabled ? "on" : "off"}`}>
+                <Reverse />
+            </Tooltip>
+        </LeftFixedContainer>
+    );
+}

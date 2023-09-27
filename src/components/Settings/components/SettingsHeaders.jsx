@@ -1,9 +1,9 @@
 export const SettingsH1 = ({ text }) => (
-  <h1 className="z-10 fixed top-0 lg:inset-x-auto font-notable text-neutral text-4xl md:text-6xl">
-    {text}
-  </h1>
+    <h1 className="fixed top-0 z-10 font-notable text-4xl text-neutral md:text-6xl lg:inset-x-auto">
+        {text}
+    </h1>
 );
 
 export const SettingsH2 = ({ text }) => (
-  <h2 className="py-4 pb-8 pl-4 text-3xl text-center">{text}</h2>
+    <h2 className="py-4 pb-8 pl-4 text-center text-3xl">{text}</h2>
 );
