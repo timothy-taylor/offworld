@@ -4,7 +4,9 @@ import { userAtom } from "../../../stores/user-store";
 import { SettingsButton } from "./SettingsButton";
 import SettingsListItem from "./SettingsListItem";
 
-export default function LogOut({ email }) {
+type Props = { email: string };
+
+export default function LogOut({ email }: Props) {
     const checkForUser = useSetAtom(userAtom);
 
     const handleLogout = async () => {

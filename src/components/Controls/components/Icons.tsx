@@ -1,5 +1,9 @@
+type Props = {
+    handleClick: () => void;
+}
+
 const effectStyles = "w-7 h-7 cursor-pointer hover:text-yellow-900";
-export const NoDelayIcon = ({ handleClick }) => (
+export const NoDelayIcon = ({ handleClick }: Props) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         className={effectStyles}
@@ -18,7 +22,7 @@ export const NoDelayIcon = ({ handleClick }) => (
     </svg>
 );
 
-export const DelayIcon = ({ handleClick }) => (
+export const DelayIcon = ({ handleClick }: Props) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         className={effectStyles}
@@ -37,7 +41,7 @@ export const DelayIcon = ({ handleClick }) => (
     </svg>
 );
 
-export const DryIcon = ({ handleClick }) => (
+export const DryIcon = ({ handleClick }: Props) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         className={effectStyles}
@@ -56,7 +60,7 @@ export const DryIcon = ({ handleClick }) => (
     </svg>
 );
 
-export const ReverbIcon = ({ handleClick }) => (
+export const ReverbIcon = ({ handleClick }: Props) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         className={effectStyles}
@@ -75,7 +79,7 @@ export const ReverbIcon = ({ handleClick }) => (
     </svg>
 );
 
-export const BackwardIcon = ({ handleClick }) => (
+export const BackwardIcon = ({ handleClick }: Props) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         className={effectStyles}

@@ -1,8 +1,14 @@
 import clsx from "clsx";
+import type { ReactNode } from "react";
+
+type Props = {
+    addStyles: string;
+    children: ReactNode;
+};
 
 //
 // at least one of the addStyles needs to be "top-[x]" to position the container vertically
-const LeftFixedContainer = ({ addStyles, children }) => (
+const LeftFixedContainer = ({ addStyles, children }: Props) => (
     <div
         className={clsx(
             "fixed left-6 z-40 flex -skew-y-2 select-none content-around items-center rounded-sm bg-slate-300 py-1 px-4 font-mono opacity-80 hover:opacity-100",

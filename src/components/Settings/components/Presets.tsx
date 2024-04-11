@@ -1,37 +1,40 @@
 import { useAtom, useAtomValue } from "jotai";
+import { useGetSupabase } from "../../../hooks/useGetSupabase";
+import { supabase } from "../../../lib/supabase-client";
 import { audioAtom } from "../../../stores/audio-engine-store";
 import { imageAtom } from "../../../stores/canvas-store";
 import { userAtom } from "../../../stores/user-store";
-import { supabase } from "../../../lib/supabase-client";
-import { useGetSupabase } from "../../../hooks/useGetSupabase";
-import SettingsListItem from "./SettingsListItem";
 import { SettingsButton } from "./SettingsButton";
+import SettingsListItem from "./SettingsListItem";
 
-const createPresetData = (id) => [
-    {
-        ix: 0,
-        label: "first",
-        text: "Preset 1",
-        audioPath: `${id}/one/audio`,
-        imagePath: `${id}/one/image`,
-    },
-    {
-        ix: 1,
-        label: "second",
-        text: "Preset 2",
-        audioPath: `${id}/two/audio`,
-        imagePath: `${id}/two/image`,
-    },
-    {
-        ix: 2,
-        label: "third",
-        text: "Preset 3",
-        audioPath: `${id}/two/audio`,
-        imagePath: `${id}/two/image`,
-    },
-];
+const createPresetData = (id: string | undefined) =>
+    id
+        ? [
+              {
+                  ix: 0,
+                  label: "first",
+                  text: "Preset 1",
+                  audioPath: `${id}/one/audio`,
+                  imagePath: `${id}/one/image`,
+              },
+              {
+                  ix: 1,
+                  label: "second",
+                  text: "Preset 2",
+                  audioPath: `${id}/two/audio`,
+                  imagePath: `${id}/two/image`,
+              },
+              {
+                  ix: 2,
+                  label: "third",
+                  text: "Preset 3",
+                  audioPath: `${id}/two/audio`,
+                  imagePath: `${id}/two/image`,
+              },
+          ]
+        : [];
 
-const uploadFile = async (path, filename) => {
+const uploadFile = async (path: string, filename: string) => {
     const { data, error } = await supabase.storage
         .from("presets")
         .upload(path, filename, { upsert: true });
@@ -40,22 +43,22 @@ const uploadFile = async (path, filename) => {
     if (data) return data;
 };
 
-const downloadFile = async (filename) => {
+const downloadFile = async (filename: string) => {
     const { data: file } = await supabase.storage
         .from("presets")
         .download(filename);
 
-    return await file.text();
+    return await file?.text();
 };
 
 export default function Presets() {
     const user = useAtomValue(userAtom);
     const [currentAudio, setCurrentAudio] = useAtom(audioAtom);
     const [currentImage, setCurrentImage] = useAtom(imageAtom);
-    const presetData = createPresetData(user.id);
+    const presetData = createPresetData(user?.id);
 
     const { data: files } = useGetSupabase(() =>
-        supabase.storage.from("presets").list(user.id, {
+        supabase.storage.from("presets").list(user?.id, {
             limit: 3,
             offset: 0,
             sortBy: { column: "name", order: "asc" },
@@ -76,8 +79,8 @@ export default function Presets() {
                                 const imageDownload = await downloadFile(
                                     e.imagePath,
                                 );
-                                await setCurrentAudio(audioDownload);
-                                setCurrentImage(imageDownload);
+                                await setCurrentAudio(audioDownload!);
+                                setCurrentImage(imageDownload!);
                             }}
                         />
                     )}
@@ -85,7 +88,10 @@ export default function Presets() {
                         text="save"
                         handleClick={async () => {
                             const result = await Promise.all([
-                                uploadFile(e.audioPath, currentAudio),
+                                uploadFile(
+                                    e.audioPath,
+                                    currentAudio.toString(),
+                                ),
                                 uploadFile(e.imagePath, currentImage),
                             ]);
 

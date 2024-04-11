@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { supabase } from "../../../lib/supabase-client";
-import SettingsListItem from "./SettingsListItem";
 import { SettingsButtonSubmit } from "./SettingsButton";
+import SettingsListItem from "./SettingsListItem";
 
 export default function LogIn() {
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState("");
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
 
         const { data } = await supabase.auth.signInWithOtp({ email });
@@ -25,7 +25,7 @@ export default function LogIn() {
                     className="text-black"
                     type="email"
                     placeholder="email@example.com"
-                    maxLength="64"
+                    maxLength={64}
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
