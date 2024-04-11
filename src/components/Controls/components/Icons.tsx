@@ -98,7 +98,7 @@ export const BackwardIcon = ({ handleClick }: Props) => (
     </svg>
 );
 
-export const ForwardIcon = ({ handleClick }) => (
+export const ForwardIcon = ({ handleClick }: Props) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         className={effectStyles}
