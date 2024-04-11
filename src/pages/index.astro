@@ -1,0 +1,32 @@
+---
+import App from "../App";
+---
+
+<html>
+    <head>
+        <title>Offworld</title>
+    </head>
+    <body class="bg-slate-300">
+        <main class="h-screen w-screen overflow-hidden overscroll-contain">
+            <App client:only="react" />
+        </main>
+    </body>
+</html>
+
+<style>
+    @font-face {
+        font-family: "Notable";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(/assets/Notable/Notable-Regular.ttf) format("truetype");
+    }
+
+    @font-face {
+        font-family: "Armata";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(/assets/Armata/Armata-Regular.ttf) format("truetype");
+    }
+</style>

@@ -1,31 +1,49 @@
 {
-  "name": "offworld",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@supabase/supabase-js": "^2.0.0-rc.8",
-    "clsx": "^2.0.0",
-    "jotai": "^1.8.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tone": "^14.7.77"
-  },
-  "scripts": {
-    "start": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "@tailwindcss/forms": "^0.5.3",
-    "@testing-library/react": "^13.4.0",
-    "@vitejs/plugin-react": "^2.1.0",
-    "autoprefixer": "^10.4.2",
-    "eslint": "^8.49.0",
-    "eslint-plugin-react": "^7.33.2",
-    "postcss": "^8.4.5",
-    "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.4",
-    "tailwindcss": "^3.1.8",
-    "vite": "^3.1.0"
-  }
+    "name": "offworld",
+    "type": "module",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@astrojs/check": "^0.5.10",
+        "@astrojs/react": "^3.2.0",
+        "@astrojs/tailwind": "^5.1.0",
+        "@headlessui/react": "^1.7.18",
+        "@headlessui/tailwindcss": "^0.2.0",
+        "@radix-ui/react-dialog": "^1.0.5",
+        "@supabase/supabase-js": "^2.42.0",
+        "astro": "^4.5.18",
+        "clsx": "2.1.0",
+        "jotai": "2.8.0",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "tailwind": "^4.0.0",
+        "tone": "14.7.77",
+        "ts-pattern": "^5.1.1"
+    },
+    "scripts": {
+        "start": "astro dev",
+        "build": "tsc && astro build",
+        "preview": "astro preview"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "0.5.7",
+        "@testing-library/react": "14.3.0",
+        "@types/node": "^20.12.7",
+        "@types/react": "^18.2.75",
+        "@types/react-dom": "^18.2.24",
+        "@typescript-eslint/eslint-plugin": "6.20.0",
+        "@typescript-eslint/parser": "^7.6.0",
+        "autoprefixer": "10.4.19",
+        "eslint": "8.56.0",
+        "eslint-plugin-react": "7.34.1",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.4.6",
+        "postcss": "8.4.38",
+        "prettier": "3.2.5",
+        "prettier-plugin-astro": "^0.13.0",
+        "prettier-plugin-organize-imports": "3.2.4",
+        "prettier-plugin-tailwindcss": "0.5.13",
+        "tailwindcss": "3.4.3",
+        "typescript": "^5.4.4"
+    }
 }
