@@ -1,6 +1,5 @@
 import { useAtomValue } from "jotai";
 import { useId } from "react";
-import type { useAppState } from "../../hooks/useAppState";
 import { toggleClass } from "../../lib/utils";
 import { playerAtom } from "../../stores/audio-engine-store";
 import LeftFixedIconButton from "../LeftFixedIconButton";
@@ -10,10 +9,9 @@ import Toolbar from "./components/Toolbar";
 type Props = {
     settingsId: string;
     helpId: string;
-    state: ReturnType<typeof useAppState>[0];
 };
 
-export default function Controls({ settingsId, helpId, state }: Props) {
+export default function Controls({ settingsId, helpId }: Props) {
     const player = useAtomValue(playerAtom),
         openSettingsId = useId(),
         openHelpId = useId(),

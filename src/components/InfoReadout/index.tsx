@@ -1,20 +1,20 @@
-import { useAppState } from "../../hooks/useAppState";
+import { useAtomValue } from "jotai";
+import { coordsAtom } from "../../stores/coord-store";
 import LeftFixedContainer from "../LeftFixedContainer";
 import { InfoIcon } from "./components/Icons";
 import PlayerDetails from "./components/PlayerDetails";
 
-type Props = {
-    state: ReturnType<typeof useAppState>[0];
+const InfoReadout = () => {
+    const [x, y] = useAtomValue(coordsAtom);
+    return (
+        <LeftFixedContainer addStyles="top-20">
+            <InfoIcon />
+            <div className="px-3">
+                <p>{`${x}, ${y}`}</p>
+                <PlayerDetails />
+            </div>
+        </LeftFixedContainer>
+    );
 };
-
-const InfoReadout = ({ state }: Props) => (
-    <LeftFixedContainer addStyles="top-20">
-        <InfoIcon />
-        <div className="px-3">
-            <p>{`${state.x}, ${state.y}`}</p>
-            <PlayerDetails />
-        </div>
-    </LeftFixedContainer>
-);
 
 export default InfoReadout;

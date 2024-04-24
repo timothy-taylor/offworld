@@ -1,4 +1,4 @@
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useCallback, useEffect, useId, useRef } from "react";
 import ErrorBoundary from "./ErrorBoundary";
 import MainCanvas from "./components/Canvas/MainCanvas";
@@ -9,21 +9,20 @@ import Help from "./components/Help";
 import InfoReadout from "./components/InfoReadout";
 import Settings from "./components/Settings";
 import Warning from "./components/Warning";
-import { useAppState } from "./hooks/useAppState";
 import { playerAtom } from "./stores/audio-engine-store";
 import { imageAtom } from "./stores/canvas-store";
+import { coordsAtom } from "./stores/coord-store";
 
 const App = () => {
-    const [state, updateState] = useAppState();
+    const setCoords = useSetAtom(coordsAtom),
+        player = useAtomValue(playerAtom),
+        image = useAtomValue(imageAtom);
 
     const settingsWindowId = useId(),
         helpWindowId = useId();
 
     const mainRef = useRef<HTMLCanvasElement | null>(null),
         zoomRef = useRef<HTMLCanvasElement | null>(null);
-
-    const player = useAtomValue(playerAtom),
-        image = useAtomValue(imageAtom);
 
     const drawZoom = useCallback((x: number, y: number) => {
         const ctx = zoomRef.current!.getContext("2d"),
@@ -61,9 +60,9 @@ const App = () => {
 
             drawZoom(x, y);
             player.updateParams(imageData!.data, x, y);
-            updateState({ x, y });
+            setCoords(x, y);
         },
-        [player, drawZoom, updateState],
+        [player, drawZoom, setCoords],
     );
 
     //
@@ -115,8 +114,8 @@ const App = () => {
     return (
         <ErrorBoundary>
             <Warning />
-            <Controls state={state} helpId={helpWindowId} settingsId={settingsWindowId} />
-            <InfoReadout state={state} />
+            <Controls helpId={helpWindowId} settingsId={settingsWindowId} />
+            <InfoReadout />
             <Settings id={settingsWindowId} />
             <Help id={helpWindowId} />
             <MainCanvas ref={mainRef} handleMove={handleMove} />
